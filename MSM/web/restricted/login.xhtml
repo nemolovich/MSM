@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Connexion</title>
+    </h:head>
+    <h:body>
+                <f:view>
+                    <h:form id="loginForm">
+                        <div id="messages_container" class="ui-growl ui-widget" style="z-index: 1010;"></div>
+                        <p:growl id="growl" showDetail="true" life="30000" />
+                        <f:event type="preRenderView"
+                                 listener="#{utils.displayMessage(
+                                             session.getAttribute('error_message'))}"/>
+                        <h:panelGrid columns="2" columnClasses="label,field">
+                            <h:outputLabel value="Mail:" for="mail" />
+                            <p:inputText id="mail" value="#{userLogin.loginMail}" title="Mail">
+                                <f:validator binding="#{userLoginValidator}"/>
+                                <f:attribute name="password" value="#{password}" />
+                            </p:inputText>
+
+                            <h:outputLabel for="password" value="Mot de passe:" />
+                            <p:password id="password" binding="#{password}"/>
+                            
+                        </h:panelGrid>
+                        <p:outputPanel styleClass="buttons_panel">
+                            <p:commandButton id="login_validate" value="Valider"
+                                             action="#{userLogin.login()}"
+                                             onclick="//reloadInterval(1);"
+                                             update=":loginForm:password"
+                                             ajax="true"
+                                             immediate="false"
+                                             styleClass="blue_icon"
+                                             icon="ui-icon-key"/>
+                        </p:outputPanel>
+                    </h:form>
+                </f:view>
+    </h:body>
+</html>
+
