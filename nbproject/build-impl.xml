@@ -14,7 +14,7 @@ is divided into following sections:
   - cleanup
 
 -->
-<project xmlns:ear2="http://www.netbeans.org/ns/j2ee-earproject/2" basedir=".." default="default" name="MSM-impl">
+<project xmlns:ear2="http://www.netbeans.org/ns/j2ee-earproject/2" basedir=".." default="default" name="MSM_EAR-impl">
     <import file="ant-deploy.xml"/>
     <fail message="Please build using Ant 1.7.1 or higher.">
         <condition>
@@ -156,15 +156,15 @@ exists or setup the property manually. For example like this:
                 pre NB7.2 profiling section; consider it deprecated
             -->
     <target depends="-profile-pre-init, init, -profile-post-init, -profile-init-check" if="profiler.info.jvmargs.agent" name="profile-init"/>
-    <target name="-profile-pre-init">
+    <target if="profiler.info.jvmargs.agent" name="-profile-pre-init">
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
-    <target name="-profile-post-init">
+    <target if="profiler.info.jvmargs.agent" name="-profile-post-init">
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
-    <target depends="-profile-pre-init, init, -profile-post-init" name="-profile-init-check">
+    <target depends="-profile-pre-init, init, -profile-post-init" if="profiler.info.jvmargs.agent" name="-profile-init-check">
         <fail unless="profiler.info.jvm">Must set JVM to use for profiling in profiler.info.jvm</fail>
         <fail unless="profiler.info.jvmargs.agent">Must set profiler agent JVM arguments in profiler.info.jvmargs.agent</fail>
     </target>
@@ -188,11 +188,11 @@ exists or setup the property manually. For example like this:
                 <isset property="build.deploy.on.save"/>
             </not>
         </condition>
-        <ant antfile="${project.MSM-ejb}/build.xml" inheritall="false" target="dist-ear">
+        <ant antfile="${project.MSM}/build.xml" inheritall="false" target="dist-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
-        <ant antfile="${project.MSM-war}/build.xml" inheritall="false" target="dist-ear">
+        <ant antfile="${project.MSM_EJB}/build.xml" inheritall="false" target="dist-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
@@ -208,8 +208,8 @@ exists or setup the property manually. For example like this:
         </copy>
     </target>
     <target depends="init,deps-jar,pre-pre-compile,pre-compile" name="-do-compile-deps">
-        <copyfiles files="${reference.MSM-war.dist-ear}" todir="${build.dir}//"/>
-        <copyfiles files="${reference.MSM-ejb.dist-ear}" todir="${build.dir}//"/>
+        <copyfiles files="${reference.MSM.dist-ear}" todir="${build.dir}//"/>
+        <copyfiles files="${reference.MSM_EJB.dist-ear}" todir="${build.dir}//"/>
     </target>
     <target name="post-compile">
         <!-- Empty placeholder for easier customization. -->
@@ -286,8 +286,8 @@ exists or setup the property manually. For example like this:
     </target>
     <target name="-run-deploy-am" unless="no.deps">
         <!-- Task to deploy to the Access Manager runtime. -->
-        <ant antfile="${project.MSM-ejb}/build.xml" inheritall="false" target="-run-deploy-am"/>
-        <ant antfile="${project.MSM-war}/build.xml" inheritall="false" target="-run-deploy-am"/>
+        <ant antfile="${project.MSM}/build.xml" inheritall="false" target="-run-deploy-am"/>
+        <ant antfile="${project.MSM_EJB}/build.xml" inheritall="false" target="-run-deploy-am"/>
     </target>
     <target depends="-init-cos,dist-directory-deploy,pre-run-deploy,-pre-nbmodule-run-deploy,-run-deploy-nb,-init-deploy-ant,-deploy-ant,-run-deploy-am,-post-nbmodule-run-deploy,post-run-deploy" name="run-deploy"/>
     <target if="netbeans.home" name="-run-deploy-nb">
@@ -380,17 +380,17 @@ exists or setup the property manually. For example like this:
         <ear2:run-appclient subprojectname="${app.client}"/>
     </target>
     <target if="j2ee.appclient.mainclass.args" name="-as-retrieve-option-workaround" unless="j2ee.clientName">
-        <property name="client.jar" value="${dist.dir}/MSMClient.jar"/>
+        <property name="client.jar" value="${dist.dir}/MSM_EARClient.jar"/>
         <sleep seconds="3"/>
-        <copy failonerror="false" file="${wa.copy.client.jar.from}/MSM/MSMClient.jar" todir="${dist.dir}"/>
+        <copy failonerror="false" file="${wa.copy.client.jar.from}/MSM_EAR/MSM_EARClient.jar" todir="${dist.dir}"/>
         <copy failonerror="false" flatten="true" todir="${dist.dir}/">
-            <fileset dir="${wa.copy.client.jar.from}/MSM" includes="**/MSMClient.jar"/>
+            <fileset dir="${wa.copy.client.jar.from}/MSM_EAR" includes="**/MSM_EARClient.jar"/>
         </copy>
-        <copy flatten="true" todir="${dist.dir}/MSMClient">
-            <fileset dir="${wa.copy.client.jar.from}/MSM" includes="**/*.*ar"/>
+        <copy flatten="true" todir="${dist.dir}/MSM_EARClient">
+            <fileset dir="${wa.copy.client.jar.from}/MSM_EAR" includes="**/*.*ar"/>
         </copy>
-        <copy failonerror="false" flatten="false" todir="${dist.dir}/MSMClient">
-            <fileset dir="${dist.dir}/gfdeploy/MSM" includes="**/*.jar"/>
+        <copy failonerror="false" flatten="false" todir="${dist.dir}/MSM_EARClient">
+            <fileset dir="${dist.dir}/gfdeploy/MSM_EAR" includes="**/*.jar"/>
         </copy>
     </target>
     <target depends="init" name="-init-run-macros">
@@ -594,11 +594,11 @@ exists or setup the property manually. For example like this:
                 <isset property="build.deploy.on.save"/>
             </not>
         </condition>
-        <ant antfile="${project.MSM-ejb}/build.xml" inheritall="false" target="clean-ear">
+        <ant antfile="${project.MSM}/build.xml" inheritall="false" target="clean-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
-        <ant antfile="${project.MSM-war}/build.xml" inheritall="false" target="clean-ear">
+        <ant antfile="${project.MSM_EJB}/build.xml" inheritall="false" target="clean-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
