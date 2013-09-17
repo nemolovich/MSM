@@ -7,5 +7,4 @@ Une souris verte, qui courait dans l'herbe...
 
 Git branching method 
 --------------------
-
 - http://nvie.com/posts/a-successful-git-branching-model/
