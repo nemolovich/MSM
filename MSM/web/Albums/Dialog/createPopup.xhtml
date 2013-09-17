@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>New Album</title>
+    </h:head>
+    <h:body>
+        <p:dialog id="CreateAlbumViewPopup"
+                  dynamic="true"
+                  appendToBody="true"
+                  header="Create a new album"
+                  widgetVar="createAlbumViewDialog"
+                  resizable="true"
+                  draggable="true"
+                  maximizable="true"
+                  modal="true"
+                  showEffect="clip"
+                  hideEffect="clip">
+            <h:form id="displayCreateAlbumForm">
+                <p:hotkey bind="esc" handler="CreateAlbumViewDialog.hide();"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Name : "/> 
+                    <p:inputText />
+                    
+                    <h:outputText value="Visibility : "/>                     
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="Public" itemValue="Public"/>
+                        <f:selectItem itemLabel="Private" itemValue="Private" />
+                        <f:selectItem itemLabel="Selected Friends" itemValue="Friends" />
+                    </p:selectOneMenu>
+                    
+                    <h:outputText id="FriendSelection" value="Select Friends" style="visibility:hidden"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

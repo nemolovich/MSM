@@ -9,6 +9,7 @@
     </h:head>
     <h:body>
         <ui:include src="/restricted/admin/data/log/logPopup.xhtml"/>
+        <ui:include src="/Albums/Dialog/createPopup.xhtml" />
         <h:form id="menu_form">
                 <p:panelMenu styleClass="menu"
                              widgetVar="menu_admin">
@@ -18,7 +19,8 @@
                         </p:menuitem>
                     </p:submenu>
                     <p:submenu label="Albums">
-                        <p:menuitem value="Create" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                        <p:menuitem value="Create"
+                                    onclick="createAlbumViewDialog.show();"/>
                     </p:submenu>
                     <p:submenu label="Parameters">
                         <p:submenu label="Language" >
@@ -28,9 +30,9 @@
                         <p:menuitem value="Security" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                     </p:submenu>
                     <p:submenu label="Journal">
-                        <p:menuitem value="Afficher"
+                        <p:menuitem value="Display"
                                     icon="ui-icon-document"
-                                    title="Afficher le journal du serveur"
+                                    title="Display the server log"
                                     update=":displayLogForm"
                                     onclick="startAjax();logViewDialog.show();"/>
                     </p:submenu>
