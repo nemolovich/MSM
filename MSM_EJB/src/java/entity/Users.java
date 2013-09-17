@@ -258,9 +258,6 @@ public class Users implements Serializable
         if ((this.rights == null) ? (other.rights != null) : !this.rights.equals(other.rights)) {
             return false;
         }
-        if ((this.password == null) ? (other.password != null) : !this.password.equals(other.password)) {
-            return false;
-        }
         return true;
     }
     

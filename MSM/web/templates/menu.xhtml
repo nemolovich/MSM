@@ -27,7 +27,8 @@
                         </p:submenu>
                         <p:menuitem value="Security" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                     </p:submenu>
-                    <p:submenu label="Journal">
+                    <p:submenu label="Journal"
+                               rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}">
                         <p:menuitem value="Afficher"
                                     icon="ui-icon-document"
                                     title="Afficher le journal du serveur"
