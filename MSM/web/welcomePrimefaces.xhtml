@@ -22,22 +22,31 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
+                    MSM - Manage and Share your Media - 2013 - v1.0
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Menu" collapsible="true">
-                    <p:menu>
+                <p:layoutUnit position="west" size="200" header="Menu" collapsible="true">
+                    <p:panelMenu>
                         <p:submenu label="Friends">
-                            <p:menuitem value="Search" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                            <p:menuitem>                            
+                                <p:autoComplete value="Search"/>
+                            </p:menuitem>
                         </p:submenu>
                         <p:submenu label="Albums">
                             <p:menuitem value="Create" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                         </p:submenu>
-                    </p:menu>
+                        <p:submenu label="Parameters">
+                            <p:submenu label="Language" >
+                                <p:menuitem value="French" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                                <p:menuitem value="English" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                            </p:submenu>
+                            <p:menuitem value="Security" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                        </p:submenu>
+                    </p:panelMenu>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                    My Albums
                 </p:layoutUnit>
 
             </p:layout>
