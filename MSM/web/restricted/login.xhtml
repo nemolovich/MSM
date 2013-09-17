@@ -3,15 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Connexion</title>
     </h:head>
     <h:body>
+        <ui:composition template="/templates/page_template.xhtml">
+            <ui:define name="title">
+                | Connection
+            </ui:define>
+            <ui:define name="content">
+                <f:attribute name="header" value="Connection"/>
                 <f:view>
                     <h:form id="loginForm">
-                        <div id="messages_container" class="ui-growl ui-widget" style="z-index: 1010;"></div>
-                        <p:growl id="growl" showDetail="true" life="30000" />
                         <f:event type="preRenderView"
                                  listener="#{utils.displayMessage(
                                              session.getAttribute('error_message'))}"/>
@@ -22,22 +27,25 @@
                                 <f:attribute name="password" value="#{password}" />
                             </p:inputText>
 
-                            <h:outputLabel for="password" value="Mot de passe:" />
+                            <h:outputLabel for="password" value="Password:" />
                             <p:password id="password" binding="#{password}"/>
                             
                         </h:panelGrid>
                         <p:outputPanel styleClass="buttons_panel">
-                            <p:commandButton id="login_validate" value="Valider"
+                            <p:commandButton id="login_validate" value="Login"
                                              action="#{userLogin.login()}"
                                              onclick="//reloadInterval(1);"
                                              update=":loginForm:password"
                                              ajax="true"
                                              immediate="false"
+                                             title="Submit connection form"
                                              styleClass="blue_icon"
                                              icon="ui-icon-key"/>
                         </p:outputPanel>
                     </h:form>
                 </f:view>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

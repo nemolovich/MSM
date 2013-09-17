@@ -1,0 +1,634 @@
+/* 
+    Document   : style
+    Created on : 17 sept. 2013, 14:41:37
+    Author     : nemo
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*********************************
+ ********   CSS LAYOUT   *********
+ *********************************/
+
+#top
+{
+    position:               relative;
+    background-color:       #036fab;
+    color:                  white;
+    padding:                5px;
+    margin:                 0px 0px 10px 0px;
+    text-align:             right;
+}
+
+#bottom
+{
+    position:               relative;
+    bottom:                 0;
+    background-color:       #c2dfef;
+    padding:                5px;
+    margin:                 10px 0px 0px 0px;
+}
+
+#left
+{
+    float:                  left;
+    background-color:       #ece3a5;
+    padding:                5px;
+    width:                  200px;
+}
+
+#right
+{
+    float:                  right;
+    background-color:       #ece3a5;
+    padding:                5px;
+    width:                  200px;
+}
+
+.center_content
+{
+    position:               relative;
+    background-color:       #dddddd;
+    padding:                5px;
+}
+
+.full_content
+{
+    position:               relative;
+    background-color:       #dddddd;
+    padding:                5px;
+}
+
+.left_content
+{
+    background-color:       #dddddd;
+    padding:                5px;
+    margin-left:            220px;
+    min-height:             300px;
+}
+
+.right_content
+{
+    background-color:       #dddddd;
+    padding:                5px;
+    margin:                 0px 220px 0px 220px;
+}
+
+#top a:link, #top a:visited
+{
+  color:                    white;
+  font-weight:              bold;
+  text-decoration:          none;
+}
+
+#top a:link:hover, #top a:visited:hover
+{
+    color:                  black;
+    font-weight:            bold;
+    text-decoration:        underline;
+}
+
+/*********************************
+ ***********   MAIN   ************
+ *********************************/
+body
+{
+    font-size:                          12px;
+    font-family:                        Verdana, "Verdana CE", 
+                                        Arial, "Arial CE",
+                                        "Lucida Grande CE", lucida,
+                                        "Helvetica CE", sans-serif;
+    color:                              #000000;  
+    width:                              100%;
+    margin:                             0 auto !important; /* '!important' est important pour écraser la valeur par défaut d'element.style */
+    -moz-box-shadow:                    0 0 2em #050622;
+    -webkit-box-shadow:                 0 0 2em #050622;
+    box-shadow:                         0 0 2em #050622;
+}
+
+h1
+{
+    font-family:                        Arial, "Arial CE",
+                                        "Lucida Grande CE", lucida,
+                                        "Helvetica CE", sans-serif;
+    border-bottom:                      1px solid #AFAFAF; 
+    font-size:                          16px;
+    font-weight:                        bold;
+    margin:                             0px;
+    padding:                            0px;
+    color:                              #D20005;
+}
+
+#header .ui-layout-unit-content
+{
+    color:                              #FFFFFF;
+    background:                         0;
+    text-shadow:                        0px 1px 0px rgba(255,255,255,0.7);
+}
+
+#header h1
+{
+    position:                           absolute;
+    border:                             0;
+    width:                              100%;
+    font-variant:                       small-caps;
+    margin:                             5px 0 0;
+    color:                              #E6E6E6;
+    font-size:                          4em;
+    text-shadow:                        1px 1px #555555,
+                                        -1px -1px #F8F8F8,
+                                        1px -1px #555555,
+                                        -1px 1px #555555,
+                                        0.1em 0.1em 0.2em #000000;
+    z-index:                            0;
+}
+
+#footer .ui-layout-unit-content
+{
+    color:                              #313131;
+    background:                         0;
+    font-size:                          0.76em;
+    border-radius:                      2px;
+    overflow-y:                         hidden;
+    font-style:                         italic;
+    text-align:                         center !important;
+    vertical-align:                     bottom !important;
+}
+
+.buttons_panel
+{
+    padding-top:                        25px;
+    padding-bottom:                     5px;
+    display:                            block;
+}
+
+.ui-outputlabel-rfi,
+.red-star
+{
+    color:                              #FF0000;
+    font-weight:                        bold;
+    margin-left:                        5px;
+}
+
+.ui-layout-center .ui-layout-unit-content
+{
+    margin:                             auto;
+    margin-top:                         0;
+    padding-top:                        0 !important;
+}
+
+.ui-layout-center .ui-layout-unit-header
+{
+    border-bottom-left-radius:          0px;
+    -webkit-border-bottom-left-radius:  0px;
+    -moz-border-radius-bottomleft:      0px;
+    border-bottom-right-radius:         0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomright:     0px;
+    font-size:                          1.2em;
+}
+
+.ui-layout-center .insert-content
+{
+    padding:                            15px 30px;
+    border:                             solid 1px #A8A8A8;
+    border-top:                         none;
+    border-radius:                      0px 0px 3px 3px;
+    -webkit-border-radius:              0px 0px 3px 3px;
+    -moz-border-radius:                 0px 0px 3px 3px;
+    margin:                             0 auto;
+}
+
+.ui-layout-center .insert-content button
+{
+    margin-right:                       5px !important;
+    margin-left:                        5px !important;
+}
+
+#menu_right-resizer,
+#menu-resizer
+{
+    background:                         0;
+    border:                             none;
+}
+
+.ui-widget-content .fields
+{
+    color:                              #313131 !important;
+    font-weight:                        bold !important;
+}
+
+.ui-widget-content .label
+{
+    vertical-align:                     top !important;
+    white-space:                        nowrap !important;
+}
+
+/*********************************
+ * Supprime la box de messages d'erreur innerHTML
+ *********************************/
+#javax_faces_developmentstage_messages
+{
+    display:                            none;
+}
+
+/*********************************
+ * Croix du growl pour fermer
+ *********************************/
+.ui-layout-unit-header-icon-copy
+{
+    float:                              right;
+    margin-right:                       0.2em;
+    margin-top:                         -0.2em;
+}
+
+.ui-layout-unit-header-icon-copy:hover
+{
+    border:                             1px solid #7096ab !important;
+    background:                         #85C2CB url("/MSM/javax.faces.resource/images/ui-bg_highlight-hard_80_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x !important;
+    background:                         #85C2CB linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0)) !important;
+    background:                         #85C2CB -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.6)), to(rgba(255,255,255,0))) !important;
+    background:                         #85C2CB -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0)) !important;
+    font-weight:                        bold;
+    color:                              #313131 !important;
+    -moz-box-shadow:                    0 0 5px #85C2CB !important;
+    -webkit-box-shadow:                 0px 0px 8px #85C2CB !important;
+    box-shadow:                         0px 0px 8px #85C2CB !important;
+}
+
+#growl_container .ui-growl-icon-close
+{
+    background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_cd0a0a_256x240.png.xhtml?ln=primefaces-aristo");
+}
+
+#growl_container
+{
+    /*margin:                             0 auto;*/
+    margin-right:                       0px;
+}
+
+#growl_container .ui-growl-icon-close:hover,
+#growl_container .ui-growl-icon-close:focus
+{
+    background-color:                   rgba(100,0,0,0.6);
+}
+
+#growl_container .ui-growl-icon-close:active,
+#clientCreate\:growlWizard_container .ui-growl-icon-close:active,
+#clientUpdate\:growlWizard_container .ui-growl-icon-close:active
+{
+    background-color:                   rgba(255,100,100,0.8);
+}
+
+/*********************************
+ * Couleur des icones par défaut
+ *********************************/
+.blue_icon .ui-icon
+{
+    background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_2e83ff_256x240.png.xhtml?ln=primefaces-aristo") !important;
+}
+
+.green_icon .ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icons_00cc2b_256x240.png") !important;
+}
+
+.red_icon .ui-icon
+{
+    background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_cd0a0a_256x240.png.xhtml?ln=primefaces-aristo") !important;
+}
+
+/*********************************
+ * tooltip style
+ *********************************/
+.tooltip
+{
+    margin:                             0 !important;
+    padding:                            0px 5px !important;
+    padding-top:                        0px !important;
+    color:                              #353535 !important;
+    border:                             1px solid #767676 !important;
+    font-family:                        'Lucida Sans Unicode', 'Lucida Grande', sans-serif !important;
+    background:                         #F8F6F0 !important; /* Old browsers */
+    background:                         -moz-linear-gradient(top,  #ffffff 0%, #e4e5f0 100%) !important; /* FF3.6+ */
+    background:                         -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e4e5f0)) !important; /* Chrome,Safari4+ */
+    background:                         -webkit-linear-gradient(top,  #ffffff 0%,#e4e5f0 100%) !important; /* Chrome10+,Safari5.1+ */
+    background:                         -o-linear-gradient(top,  #ffffff 0%,#e4e5f0 100%) !important; /* Opera 11.10+ */
+    background:                         -ms-linear-gradient(top,  #ffffff 0%,#e4e5f0 100%) !important; /* IE10+ */
+    background:                         linear-gradient(top,  #ffffff 0%,#e4e5f0 100%) !important; /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e4e5f0',GradientType=0 ) !important; /* IE6-9 */
+    font-size:                          100% !important;
+    -webkit-box-shadow:                 5px 5px 2px -3px #767676;
+    -moz-box-shadow:                    5px 5px 2px -3px #767676;
+    box-shadow:                         5px 5px 2px -3px #767676;
+}
+
+/*********************************
+ * Pour le journal
+ *********************************/
+.big_sep
+{
+    border-color:                       #C0C0C0;
+    border-width:                       2px;
+    border-radius:                      4px;
+    -webkit-border-radius:              4px;
+    -moz-border-radius:                 4px;
+}
+
+.sep
+{
+    border-color:                       #D0D0D0;
+    border-width:                       1.5px;
+    border-radius:                      4px;
+    -webkit-border-radius:              4px;
+    -moz-border-radius:                 4px;
+}
+
+.small_sep
+{
+    border-color:                       #DEDEDE;
+    border-width:                       1px;
+    border-radius:                      4px;
+    -webkit-border-radius:              4px;
+    -moz-border-radius:                 4px;
+}
+
+.icon_info
+{
+    cursor:                             help;
+}
+
+a.blankLink,
+a.blankLink:link,
+a.blankLink:visited
+{
+    cursor:                             pointer !important;
+    color:                              #767676 !important;
+}
+
+a.blankLink:focus,
+a.blankLink:hover,
+a.blankLink:visited:focus,
+a.blankLink:link:focus,
+a.blankLink:visited:hover,
+a.blankLink:link:hover
+{
+    padding:                            0 2px;
+    background-color:                   #C0C0C0 !important;
+    color:                              #FFFFFF !important;
+    text-decoration:                    underline !important;
+    text-shadow:                        1px 1px 1px #333333;
+}
+
+TABLE.infos_header
+{
+    background-color:                   #F1F5F8;
+    border:                             1px solid #E6F0FC;
+    border-radius:                      4px;
+    -webkit-border-radius:              4px;
+    -moz-border-radius:                 4px;
+    padding:                            5px;
+    padding-bottom:                     25px;
+    margin:                             0 auto;
+    width:                              100%;
+}
+
+#logViewPopup .ui-widget-content
+{
+    width:                              100% !important;
+    height:                             auto !important;
+    display:                            block;
+}
+
+#logContainer
+{
+    width:                              98% !important;
+    height:                             auto !important;
+    padding-bottom:                     45px !important;
+    overflow:                           -moz-scrollbars-vertical;
+    overflow-y:                         scroll;
+}
+
+/*********************************
+ * Pour la barre de chargement Ajax
+ *********************************/
+.invisible_back
+{
+    background:                         0 !important;
+    padding:                            0 !important;
+    margin:                             0 !important;
+    -webkit-box-shadow:                 none !important;
+    -moz-box-shadow:                    none !important;
+    box-shadow:                         none !important;
+    border:                             none !important;
+}
+
+.invisible_back center
+{
+    color:                              #FFFFFF !important;
+    text-shadow:                        1px 1px 0 rgba(25,25,25,0.7),
+                                        1px 1px 0.2em rgba(25,25,25,0.7);
+}
+
+.invisible_back img
+{
+    border-radius:                      4px;
+    -webkit-border-radius:              4px;
+    -moz-border-radius:                 4px;
+    -webkit-box-shadow:                 1px 1px 0.2em rgba(25,25,25,0.7) !important;
+    -moz-box-shadow:                    1px 1px 0.2em rgba(25,25,25,0.7) !important;
+    box-shadow:                         1px 1px 0.2em rgba(25,25,25,0.7) !important;
+}
+
+#closeAjax
+{
+    background:                         0 !important;
+    display:                            none;
+    width:                              18px !important;
+    height:                             18px !important;
+    position:                           fixed !important;
+    top:                                2px !important;
+    right:                              2px !important;
+    font-weight:                        bold !important;
+    color:                              #FFFFFF !important;
+    padding:                            0 !important;
+    vertical-align:                     top !important;
+    border:                             none !important;
+    border-radius:                      10px !important;
+    -webkit-border-radius:              10px !important;
+    -moz-border-radius:                 10px !important;
+    box-shadow:                         none;
+    -webkit-box-shadow:                 none;
+    -moz-box-shadow:                    none;
+    z-index:                            1111 !important;
+    cursor:                             pointer !important;
+}
+
+#closeAjax:hover
+{
+    background-color:                   rgba(255,0,0,0.4) !important;
+}
+
+#closeAjax:active,
+#closeAjax:hover:active,
+#closeAjax:focus:active
+{
+    background-color:                   rgba(255,0,0,0.8) !important;
+}
+
+/*********************************
+ * Boites de dialogue
+ *********************************/
+.ui-button.ui-widget.ui-state-error
+{
+    background:                         #F4C4C4 url("/MSM/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
+    background:                         #F4C4C4 -moz-linear-gradient(top,  rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+    background:                         #F4C4C4 -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.8)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+    background:                         #F4C4C4 -webkit-linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         #F4C4C4 -o-linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+    background:                         #F4C4C4 -ms-linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+    background:                         #F4C4C4 linear-gradient(top,  rgba(255,255,255,0.8) 0%,rgba(255,255,255,0) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccF4C4C4', endColorstr='#00F4C4C4',GradientType=0 ); /* IE6-9 */
+}
+
+.ui-button.ui-widget.ui-state-error.ui-state-hover
+{
+    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
+    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.6)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#9985B2CB', endColorstr='#0085B2CB',GradientType=0 ); /* IE6-9 */
+    border-color:                       #7096AB !important;
+    color:                              #313131 !important;
+}
+
+.ui-button.ui-widget.ui-state-error.ui-state-active
+{
+    border-color:                       #7096AB !important;
+    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_inset-hard_65_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
+    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%); /* FF3.6+ */
+    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))); /* Chrome,Safari4+ */
+    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Opera 11.10+ */
+    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* IE10+ */
+    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085B2CB ', endColorstr='#6685B2CB ',GradientType=0 ); /* IE6-9 */
+    color:                              #1C4257;
+}
+
+.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.yes_no_button span.ui-icon
+{
+    background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_cd0a0a_256x240.png.xhtml?ln=primefaces-aristo") !important;
+}
+
+.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.yes_no_button.ui-state-active span.ui-icon
+{
+    background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_2e83ff_256x240.png.xhtml?ln=primefaces-aristo") !important;
+}
+
+.inside_dialog
+{
+    float:                              right;
+    margin:                             0 auto;
+    margin-top:                         5px;
+    margin-right:                       5px;
+    border:                             solid 1px #A8A8A8;
+    border-radius:                      3px;
+    -webkit-border-radius:              3px;
+    -moz-border-radius:                 3px;
+    width:                              auto;
+    height:                             100%;
+    min-height:                         100%;
+    padding:                            15px;
+}
+
+.inside_dialog button.ui-button
+{
+    width:                              16px;
+    height:                             16px;
+    float:                              right;
+    margin-top:                         -18px;
+    margin-right:                       -17px;
+    font-size:                          60%;
+}
+
+.inside_dialog button:not(.ui-state-hover)
+{
+    background:                         none;
+    border:                             none;
+}
+
+.inside_dialog button.ui-state-active
+{
+    border-color:                       #7096AB !important;
+    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_inset-hard_65_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
+    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%); /* FF3.6+ */
+    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))); /* Chrome,Safari4+ */
+    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Opera 11.10+ */
+    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* IE10+ */
+    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085B2CB ', endColorstr='#6685B2CB ',GradientType=0 ); /* IE6-9 */
+    color:                              #1C4257;
+}
+
+.inside_dialog button.ui-state-focus
+{
+    box-shadow:                         none;
+    -webkit-box-shadow:                 none;
+    -moz-box-shadow:                    none;
+}
+
+/*********************************
+ * Icones personnalisés
+ *********************************/
+.ui-icon-pdf.ui-icon,
+.ui-icon-users-config.ui-icon,
+.ui-icon-new-users.ui-icon,
+.ui-icon-users.ui-icon,
+.ui-icon-admin-config.ui-icon,
+.ui-icon-admin.ui-icon
+{
+    background-size:                    16px, 16px;
+    background-repeat:                  no-repeat;
+    background-position:                0px 1px;
+}
+
+.ui-icon-pdf.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-pdf.png") !important;
+}
+
+.ui-icon-users-config.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-users-config.png") !important;
+}
+
+.ui-icon-new-users.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-new-users.png") !important;
+}
+
+.ui-icon-users.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-users.png") !important;
+}
+
+.ui-icon-admin-config.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-admin-config.png") !important;
+}
+
+.ui-icon-admin.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-admin.png") !important;
+}
+
+
+/*********************************
+ * 
+ *********************************/
+

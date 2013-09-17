@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Journal</title>
+    </h:head>
+    <h:body>
+        <p:dialog id="logViewPopup"
+                  dynamic="true"
+                  appendToBody="true"
+                  header="Fichier journal du serveur"
+                  widgetVar="logViewDialog"
+                  resizable="true"
+                  draggable="true"
+                  maximizable="true"
+                  modal="true"
+                  width="750"
+                  height="500"
+                  minWidth="750"
+                  minHeight="500"
+                  showEffect="clip"
+                  hideEffect="clip">
+            <h:form id="displayLogForm">
+                <p:hotkey bind="esc" handler="logViewDialog.hide();"/>
+                <p:outputPanel>
+                    <p:commandButton id="archiveLog"
+                                     actionListener="#{logger.archive(false)}"
+                                     value="Archiver"
+                                     update=":growl :displayLogForm:logContainerPanel :displayLogForm:fileSelection"
+                                     style="float:left;"
+                                     icon="ui-icon-folder-collapsed"
+                                     title="Archiver le journal"/>
+                    <p:selectOneMenu id="fileSelection"
+                                     style="margin:2px 15px !important;float:left;"
+                                     immediate="true"
+                                     effect="fade"
+                                     var="logFile"
+                                     value="#{logger.selectedFile}">
+                        <p:ajax update=":displayLogForm:logContainerPanel"
+                                process="@this"
+                                listener="#{logger.ajaxSelect}"/>
+                        <f:selectItem itemValue=""
+                                      itemLabel="Journal courant"/>
+                        <f:selectItems value="#{logger.getFilesInPath()}"/>
+                        <f:converter binding="#{logFileConverter}"/>
+                        <p:column>
+                            #{logger.getFileNameAndDate(logFile.name)}
+                        </p:column>
+                    </p:selectOneMenu>
+                </p:outputPanel>
+                <p:outputPanel id="logContainerPanel"
+                               style="float:left;margin-top:10px;width:100%;">
+                    <div id="logContainer">
+                        <h:outputText value="#{logger.getHTMLLog()}"
+                                      escape="false"/>
+                        <script type="text/javascript">
+                            $(document).ready(function()
+                            {
+                                var element=document.getElementById("logContainer");
+                                var maxEHeight=getNavigatorHeight();
+                                var parentHeight=document.getElementById("logViewPopup").style.height;
+                                if(maxEHeight>parentHeight)
+                                {
+                                    maxEHeight=parentHeight;
+                                }
+                                element.style.maxHeight=(maxEHeight-150)+"px";
+                            });
+                        </script>
+                    </div>
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/style.css" />
+        <!--<link rel="shortcut icon" type="image/x-icon" href="${request.contextPath}/resources/img/AS_ICON_300.png"/>-->
+        <h:outputScript name="js/utils.js" />
+        <title>
+            MSM
+            <ui:insert name="title">
+                | Welcome
+            </ui:insert>
+        </title>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+//                if(#{not userLogin.headerClosed})
+//                {
+//                    hideTimer=setTimeout(hideHeader,4000);
+//                }
+//                initHeader();
+            });
+        </script>
+    </h:head>
+
+    <h:body>
+        <p:commandButton id="closeAjax"
+                         icon="ui-icon-closethick"
+                         title="Cacher la page de chargement"
+                         onclick="stopAjax();"/>
+        
+        <p:ajaxStatus widgetVar="ajaxStatusVar" onstart="startAjax();" onsuccess="stopAjax();"/>
+
+        <p:dialog id="ajaxStatus"
+                  modal="true"
+                  appendToBody="true"
+                  showHeader="false"
+                  showEffect="fade"
+                  hideEffect="fade"
+                  widgetVar="statusDialog"
+                  draggable="false"
+                  closable="false"
+                  styleClass="invisible_back"
+                  resizable="false">
+            <p:hotkey bind="esc" process="@this" handler="statusDialog.hide();"/>
+            <p:graphicImage value="/resources/img/ajaxloadingbar.gif"/>
+            <center>
+                <h:outputText value="Loading..."/>
+            </center>
+        </p:dialog>
+        <div id="messages_container" class="ui-growl ui-widget" style="z-index: 1010;"></div>
+        <p:growl id="growl" showDetail="true" life="30000" />
+        <p:layout id="fullPage"
+                  widgetVar="fullPageLayout"
+                  fullPage="true"
+                  stateful="false">
+            <p:ajax event="resize"
+                    listener="#{userLogin.handleResize}"/>
+            <p:ajax event="toggle"
+                    listener="#{userLogin.handleToggle}"/>
+            <p:layoutUnit id="#{userLogin.headerID}"
+                          size="#{userLogin.headerSize}"
+                          closable="true"
+                          position="north"
+                          resizable="false"
+                          collapsible="false">
+                <ui:insert name="top">
+                    <ui:include src="/templates/header.xhtml"/>
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit id="#{userLogin.menuLeftID}"
+                          position="west"
+                          size="#{userLogin.menuLeftSize}"
+                          collapsed="#{userLogin.menuLeftClosed or
+                                       userLogin.rights.equals(tUserView.unknown_Rights)}"
+                          header="Menu"
+                          resizable="true"
+                          gutter="2"
+                          collapsible="true"
+                          effect="drop"
+                          effectSpeed="slow">  
+                <ui:insert name="left">
+                    <ui:include src="/templates/menu.xhtml"/>
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit id="#{userLogin.menuRightID}"
+                          position="east"
+                          size="#{userLogin.menuRightSize}"
+                          collapsed="#{userLogin.menuRightClosed}"
+                          header="Liste des tâches"
+                          resizable="true"
+                          gutter="3"
+                          collapsible="true"
+                          effect="drop"
+                          effectSpeed="slow"
+                          rendered="#{userLogin.rights.equals(tUserView.admin_Rights)}">
+                <ui:insert name="right">
+                    <ui:include src="/templates/menu_right.xhtml"/>
+                </ui:insert>
+            </p:layoutUnit>
+            <script type="text/javascript">
+                $(document).ready(function()
+                {
+//                    addExpandableButton("menu_right", "taskMenuDataDialog");
+                });
+            </script>
+            <p:layoutUnit id="content_panel"
+                          header="Manage and Share your Medias"
+                          position="center">
+                <div class="insert-content">
+                    <ui:insert name="content">
+                        MSM
+                    </ui:insert>
+                </div>
+
+            </p:layoutUnit>
+            <p:layoutUnit id="footer"
+                          position="south"
+                          size="20">
+                <ui:insert name="bottom">
+                    <ui:include src="/templates/footer.xhtml"/>
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>
