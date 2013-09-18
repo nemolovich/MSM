@@ -21,7 +21,7 @@
                              selection="#{taskView.entity}"
                              selectionMode="single">
                     <p:column>
-                        #{user}
+                        <h:outputText value="#{user.firstname} #{user.name}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
