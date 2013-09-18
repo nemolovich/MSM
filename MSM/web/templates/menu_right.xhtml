@@ -1,12 +1,32 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <f:view>
+            <h:form id="menu_right_form">
+                <p:dataTable id="taskMenuDataTable"
+                             value="#{usersView.entries}"
+                             var="user"
+                             widgetVar="taskMenuTable"
+                             rowIndexVar="index"
+                             paginatorPosition="both"
+                             emptyMessage="Aucune tâche n'a été trouvée"
+                             rowStyleClass="#{item.sleeping?'sleeping_elmt':null}"
+                             paginator="true"
+                             rows="#{utils.maxDataRows*2}"
+                             sortBy="#{user.firstname}"
+                             filteredValue="#{usersView.filteredEntities}"
+                             selection="#{taskView.entity}"
+                             selectionMode="single">
+                </p:dataTable>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 

@@ -9,6 +9,7 @@
     </h:head>
     <h:body>
         <ui:include src="/restricted/admin/data/log/logPopup.xhtml"/>
+        <ui:include src="/Albums/Dialog/createPopup.xhtml" />
         <h:form id="menu_form">
                 <p:panelMenu styleClass="menu"
                              widgetVar="menu_admin">
@@ -18,20 +19,30 @@
                         </p:menuitem>
                     </p:submenu>
                     <p:submenu label="Albums">
-                        <p:menuitem value="Create" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                        <p:menuitem value="Create"
+                                    icon="ui-icon-create"
+                                    onclick="createAlbumViewDialog.show();"/>
                     </p:submenu>
-                    <p:submenu label="Parameters">
+                    <p:submenu label="Parameters"
+                               icon="ui-icon-parameters">
                         <p:submenu label="Language" >
-                            <p:menuitem value="French" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
-                            <p:menuitem value="English" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                            <p:menuitem value="French"
+                                        icon="ui-icon-fr-flag" 
+                                        url="http://www.primefaces.org/showcase-labs/ui/home.jsf"
+                                        />
+                            <p:menuitem value="English" 
+                                        icon="ui-icon-uk-flag"
+                                        url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                         </p:submenu>
-                        <p:menuitem value="Security" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                        <p:menuitem value="Security" 
+                                    icon="ui-icon-security"
+                                    url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                     </p:submenu>
-                    <p:submenu label="Journal"
+                    <p:submenu label="Log"
                                rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}">
-                        <p:menuitem value="Afficher"
+                        <p:menuitem value="Display"
                                     icon="ui-icon-document"
-                                    title="Afficher le journal du serveur"
+                                    title="Display the server log"
                                     update=":displayLogForm"
                                     onclick="startAjax();logViewDialog.show();"/>
                     </p:submenu>

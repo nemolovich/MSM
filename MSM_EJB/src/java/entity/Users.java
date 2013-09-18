@@ -11,7 +11,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +21,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +46,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Users.findByPassword", query = "SELECT t FROM Users t WHERE t.password = :password")})
 public class Users implements Serializable
 {
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "users")
+    private FriendsRelation friendsRelation;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "secondId")
+    private List<FriendsRelation> friendsRelationList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -270,6 +279,23 @@ public class Users implements Serializable
     public String toString()
     {
         return this.firstname+" "+this.name+" ["+this.rights+"](id="+this.id+")";
+    }
+
+    public FriendsRelation getFriendsRelation() {
+        return friendsRelation;
+    }
+
+    public void setFriendsRelation(FriendsRelation friendsRelation) {
+        this.friendsRelation = friendsRelation;
+    }
+
+    @XmlTransient
+    public List<FriendsRelation> getFriendsRelationList() {
+        return friendsRelationList;
+    }
+
+    public void setFriendsRelationList(List<FriendsRelation> friendsRelationList) {
+        this.friendsRelationList = friendsRelationList;
     }
 
 }
