@@ -65,7 +65,7 @@ public class UsersView extends EntityView<Users, UsersFacade>
         return Utils.ADMIN_RIGHTS;
     }
     
-    public String geUsers_Rights()
+    public String getUser_Rights()
     {
         return Utils.USER_RIGHTS;
     }

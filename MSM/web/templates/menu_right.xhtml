@@ -10,20 +10,19 @@
     <h:body>
         <f:view>
             <h:form id="menu_right_form">
-                <p:dataTable id="taskMenuDataTable"
-                             value="#{usersView.entries}"
+                <p:dataTable id="friendsMenuDataTable"
+                             value="#{usersMultiView.getData(usersView.entries)}"
                              var="user"
-                             widgetVar="taskMenuTable"
+                             widgetVar="friendsMenuTable"
                              rowIndexVar="index"
-                             paginatorPosition="both"
-                             emptyMessage="Aucune tâche n'a été trouvée"
-                             rowStyleClass="#{item.sleeping?'sleeping_elmt':null}"
-                             paginator="true"
-                             rows="#{utils.maxDataRows*2}"
+                             emptyMessage="No friends have"
+                             paginator="false"
                              sortBy="#{user.firstname}"
-                             filteredValue="#{usersView.filteredEntities}"
                              selection="#{taskView.entity}"
                              selectionMode="single">
+                    <p:column>
+                        #{user}
+                    </p:column>
                 </p:dataTable>
             </h:form>
         </f:view>

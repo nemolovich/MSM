@@ -1,0 +1,73 @@
+
+<p:fieldset legend="Fichiers">
+    <table style="width:auto;">
+        <tr>
+            <td style="vertical-align:top !important;">
+                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"
+                              mode="advanced"
+                              dragDropSupport="true"
+                              multiple="true"
+                              process="@this"
+                              update=":clientCreate:clientFiles"
+                              sizeLimit="800000000"
+                              label="Parcourir..."
+                              uploadLabel="Envoyer"
+                              cancelLabel="Annuler"
+                              onstart="startAjax();"
+                              oncomplete="stopAjax();"
+                              invalidFileMessage="Type de fichier invalide"
+                              invalidSizeMessage="Taille du fichier invalide"
+                              widgetVar="fileUploadVar"
+                              style="float:left;height:100% !important;vertical-align: top !important"
+                              allowTypes="#{utils.getTextFilesExtensions()}" >
+                </p:fileUpload>
+            </td>
+            <td style="vertical-align:top !important;float:right;">
+                <p:dataTable id="clientFiles"
+                             value="#{clientView.entityFilePath.filesInPath}"
+                             var="file"
+                             rows="5"
+                             emptyMessage="Aucun fichier n'est présent"
+                             paginatorPosition="top"
+                             sortBy="#{file.name}"
+                             style="float:right;"
+                             paginator="true">
+
+                    <p:column headerText="Nom">
+                        <h:outputText value="#{file.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Taille">
+                        <h:outputText value="#{files.getStringSize(file.length())}"/>
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton icon="ui-icon-trash"
+                                         styleClass="red_icon"
+                                         style="font-size:60%;"
+                                         onclick="if(!confirm('#{fileUploadController.getDeleteMessage(file)}'))
+                                         {return false;}"
+                                         actionListener="#{fileUploadController.deleteFile(file)}"
+                                         title="Supprimer ce fichier"
+                                         update=":clientCreate:clientFiles"/>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:outputPanel style="float:left;">
+                            <p:commandButton action="#{fileUploadController.deleteAllFiles()}"
+                                             icon="ui-icon-trash"
+                                             styleClass="red_icon"
+                                             onclick="if(!confirm('#{fileUploadController.deleteAllMessage}'))
+                                                        {return false;}"
+                                             title="Supprimer tous les fichier du serveur"
+                                             value="Tout supprimer"
+                                             update=":growl :clientCreate:clientFiles"
+                                             disabled="#{fileUploadController.emptyFolder}"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                </p:dataTable>
+            </td>
+        </tr>
+    </table>
+</p:fieldset>

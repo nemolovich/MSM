@@ -77,7 +77,7 @@
                           position="west"
                           size="#{userLogin.menuLeftSize}"
                           collapsed="#{userLogin.menuLeftClosed or
-                                       userLogin.rights.equals(tUserView.unknown_Rights)}"
+                                       userLogin.rights.equals(usersView.unknown_Rights)}"
                           header="Menu"
                           resizable="true"
                           gutter="2"
@@ -98,7 +98,7 @@
                           collapsible="true"
                           effect="drop"
                           effectSpeed="slow"
-                          rendered="#{userLogin.rights.equals(tUserView.admin_Rights)}">
+                          rendered="#{not userLogin.rights.equals(usersView.unknown_Rights)}">
                 <ui:insert name="right">
                     <ui:include src="/templates/menu_right.xhtml"/>
                 </ui:insert>
