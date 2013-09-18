@@ -20,14 +20,23 @@
                     </p:submenu>
                     <p:submenu label="Albums">
                         <p:menuitem value="Create"
+                                    icon="ui-icon-create"
                                     onclick="createAlbumViewDialog.show();"/>
                     </p:submenu>
-                    <p:submenu label="Parameters">
+                    <p:submenu label="Parameters"
+                               icon="ui-icon-parameters">
                         <p:submenu label="Language" >
-                            <p:menuitem value="French" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
-                            <p:menuitem value="English" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                            <p:menuitem value="French"
+                                        icon="ui-icon-fr-flag" 
+                                        url="http://www.primefaces.org/showcase-labs/ui/home.jsf"
+                                        />
+                            <p:menuitem value="English" 
+                                        icon="ui-icon-uk-flag"
+                                        url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                         </p:submenu>
-                        <p:menuitem value="Security" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                        <p:menuitem value="Security" 
+                                    icon="ui-icon-security"
+                                    url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                     </p:submenu>
                     <p:submenu label="Journal">
                         <p:menuitem value="Display"

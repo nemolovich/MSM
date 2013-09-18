@@ -590,7 +590,12 @@ TABLE.infos_header
 .ui-icon-new-users.ui-icon,
 .ui-icon-users.ui-icon,
 .ui-icon-admin-config.ui-icon,
-.ui-icon-admin.ui-icon
+.ui-icon-admin.ui-icon,
+.ui-icon-fr-flag.ui-icon,
+.ui-icon-uk-flag.ui-icon,
+.ui-icon-create.ui-icon,
+.ui-icon-parameters.ui-icon,
+.ui-icon-security.ui-icon
 {
     background-size:                    16px, 16px;
     background-repeat:                  no-repeat;
@@ -627,7 +632,30 @@ TABLE.infos_header
     background-image:                   url("/MSM/resources/img/ui-icon-admin.png") !important;
 }
 
+.ui-icon-fr-flag.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/FR-flag.png") !important;
+}
 
+.ui-icon-uk-flag.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/UK-flag.png") !important;
+}
+
+.ui-icon-create.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-create.png") !important;
+}
+
+.ui-icon-parameters.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-parameters.png") !important;
+}
+
+.ui-icon-security.ui-icon
+{
+    background-image:                   url("/MSM/resources/img/ui-icon-security.png") !important;
+}
 /*********************************
  * 
  *********************************/
