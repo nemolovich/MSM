@@ -2,3 +2,10 @@
 /dist/
 */nbprojects/*
 *build.xml
+/nbproject/private/
+/MSM/nbproject/
+/MSM_EJB/nbproject/
+/MSM_EJB/build/
+/MSM_EJB/dist/
+/MSM/build/
+/MSM/dist/
