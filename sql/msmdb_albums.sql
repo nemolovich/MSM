@@ -4,10 +4,10 @@
 -- |                 DE LA TABLE ALBUMS                  | --
 -- '=====================================================' --
 -------------------------------------------------------------
--- DATABSE: 		administration_db [root on ROOT]
--- URL:				jdbc:derby://localhost/administration_db
+-- DATABSE: 		msmdb [root on ROOT]
+-- URL:				jdbc:derby://localhost:1527/msmdb
 -- AUTHOR:			Maël BARBIN
--- DATE:			2013-06-13 13:27
+-- DATE:			2013-09-18 13:27
 -------------------------------------------------------------
 
 

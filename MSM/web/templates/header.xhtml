@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <script type="text/javascript">
             $(document).ready(function()
@@ -18,8 +19,18 @@
                     Manage and Share your Media
                 </center>
             </h1>
-            <h:outputText style="color:#313131;float:right;"
-                          value="Your Rights: #{userLogin.rights}"/>
+            <p:outputPanel style="float:right;">
+                <h:outputText style="color:#313131;float:right;"
+                              value="Your Rights: #{userLogin.rights}"/>
+                <p:commandButton icon="ui-icon-power"
+                                 title="Close your session"
+                                 value="Logout"
+                                 style="font-size:75%;float:right;margin:5px;"
+                                 styleClass="red_icon"
+                                 action="#{userLogin.logout()}"
+                                 onclick="reloadInterval(1);"
+                                 rendered="#{userLogin.logged}"/>
+            </p:outputPanel>
         </h:form>
     </h:body>
 </html>

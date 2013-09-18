@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +40,18 @@ public class Utils
      * Nom de l'application
      */
     public static final String APPLICATION_NAME="MSM";
+    /**
+     * Nom complet de l'application
+     */
+    public static final String APPLICATION_FULLNAME="Manage and Share your Media";
+    /**
+     * Version de l'application
+     */
+    public static final double APPLICATION_VERSION=1.0;
+    /**
+     * Date de déploiement de l'application
+     */
+    public static final Date APPLICATION_DATE=Calendar.getInstance().getTime();
     /**
      * Répertoire des ressources sur le serveur
      */
@@ -73,6 +86,24 @@ public class Utils
 
     public Utils()
     {
+    }
+
+    public static String APPLICATION_NAME()
+    {
+        return APPLICATION_NAME;
+    }
+
+    public static double APPLICATION_VERSION()
+    {
+        return APPLICATION_VERSION;
+    }
+
+    public static String APPLICATION_FULLNAME() {
+        return APPLICATION_FULLNAME;
+    }
+
+    public static Date APPLICATION_DATE() {
+        return APPLICATION_DATE;
     }
     
     /**

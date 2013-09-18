@@ -37,10 +37,10 @@
                 </h:panelGrid>
                 
                 <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}" 
-                                    mode="advanced"
-                                    dragDropSupport="true"  
-                                    update="messages"
-                                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+                                mode="advanced"
+                                dragDropSupport="true"  
+                                update="messages"
+                                allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
   
                 <p:growl id="messages" showDetail="true"/>  
                 
@@ -48,6 +48,14 @@
                     <h:button value="Create"/>
                     <h:button value="Cancel"/>
                 </h:panelGrid>
+<!--            Pour les boutons:    
+                <p:outputPanel styleClass="buttons_panel">
+                    <p:commandButton value="Create"
+                                     title="Confirm album creation"/>
+                    <p:commandButton value="Cancel"
+                                     title="Cancel album creation"
+                                     onclick="createAlbumViewDialog.hide();"/>
+                </p:outputPanel>-->
             </h:form>
         </p:dialog>
     </h:body>

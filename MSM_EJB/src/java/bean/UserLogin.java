@@ -415,7 +415,7 @@ public class UserLogin implements Serializable
     public String login()
     {
         this.setTemplate(this.user.getRights().toLowerCase());
-        if(this.askedURL!=null)
+        if(this.askedURL!=null&&!this.getRights().equals(Utils.UNKNOWN_RIGHTS))
         {
             return this.askedURL;
         }
@@ -441,6 +441,7 @@ public class UserLogin implements Serializable
         ApplicationLogger.writeInfo("Déconnexion de l'utilisateur: "+
                 this.user.toString());
         this.user=null;
+        this.askedURL=null;
         this.template="unknown";
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,

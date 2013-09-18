@@ -4,10 +4,10 @@
 -- |                 DE LA TABLE USERS                   | --
 -- '=====================================================' --
 -------------------------------------------------------------
--- DATABSE: 		administration_db [root on ROOT]
--- URL:				jdbc:derby://localhost/administration_db
+-- DATABSE: 		msmdb [root on ROOT]
+-- URL:				jdbc:derby://localhost:1527/msmdb
 -- AUTHOR:			Brian GOHIER
--- DATE:			2013-06-13 13:27
+-- DATE:			2013-08-18 13:27
 -------------------------------------------------------------
 
 --- Supprime les tables si elles existent, sinon commenter --
@@ -15,15 +15,16 @@ DELETE FROM ROOT.FRIENDS_RELATION;
 ALTER TABLE ROOT.FRIENDS_RELATION DROP CONSTRAINT friends_relation_first_id_fk;
 ALTER TABLE ROOT.FRIENDS_RELATION DROP CONSTRAINT friends_relation_second_id_fk;
 DROP TABLE ROOT.FRIENDS_RELATION;
+ALTER TABLE ROOT.FRIENDS_RELATION ALTER COLUMN ID RESTART WITH 1;
 DELETE FROM ROOT.USERS;
 ALTER TABLE ROOT.USERS ALTER COLUMN ID RESTART WITH 1;
 DROP TABLE ROOT.USERS;
 
----------------- Crï¿½ation de la table USERS -----------------
+---------------- Création de la table USERS -----------------
 -- TABLE:			USERS
 -- DESCRIPTION: 	Table concernant les utilisateurs
--- 	du site, ceux qui ont accï¿½s aux donnï¿½es de la base
--- 	de donnï¿½es.
+-- 	du site, ceux qui ont accès aux données de la base
+-- 	de données.
 CREATE TABLE ROOT.USERS (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY
  		(START WITH 1, INCREMENT BY 1),
@@ -37,23 +38,25 @@ CREATE TABLE ROOT.USERS (
 	);
 
 ------- Permet de ne laisser l'identifiant '1' libre --------
--- Redï¿½marre le compteur ï¿½ '0', crï¿½ation d'admin temporaire
---  prenant alors en ID '0', prochaine entrï¿½e ï¿½ '1'
+-- Redémarre le compteur à '0', création d'admin temporaire
+--  prenant alors en ID '0', prochaine entrée à '1'
 ALTER TABLE ROOT.USERS ALTER COLUMN ID RESTART WITH 0;
 
----------- Crï¿½ation d'un administrateur par dï¿½faut ----------
+---------- Création d'un administrateur par défaut ----------
 -- LOGIN (mail):		admin
 -- PASSWORD:			admin
--- /!\ Ne pas oublier de supprimer cette entrï¿½e aprï¿½s  /!\ --
--- /!\ avoir crï¿½ï¿½ votre administrateur via l'interface /!\ --
+-- /!\ Ne pas oublier de supprimer cette entrée après  /!\ --
+-- /!\ avoir créé votre administrateur via l'interface /!\ --
 -- /!\ principale                                      /!\ --
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('admin', '', '', 'ADMIN',
-				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
+				'!#/)zW¥§C‰JJ€Ã                ');
 
 
 CREATE TABLE ROOT.FRIENDS_RELATION (
+		id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+ 		(START WITH 1, INCREMENT BY 1),
         first_id INTEGER NOT NULL,
         second_id INTEGER NOT NULL,
         CONSTRAINT friends_relation_first_id_fk

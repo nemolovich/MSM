@@ -22,7 +22,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,25 +30,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Brian GOHIER
+ * @author nemo
  */
 @Entity
 @Table(name = "USERS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT t FROM Users t"),
-    @NamedQuery(name = "Users.findById", query = "SELECT t FROM Users t WHERE t.id = :id"),
-    @NamedQuery(name = "Users.findByMail", query = "SELECT t FROM Users t WHERE t.mail = :mail"),
-    @NamedQuery(name = "Users.findByName", query = "SELECT t FROM Users t WHERE t.name = :name"),
-    @NamedQuery(name = "Users.findByFirstname", query = "SELECT t FROM Users t WHERE t.firstname = :firstname"),
-    @NamedQuery(name = "Users.findByRights", query = "SELECT t FROM Users t WHERE t.rights = :rights"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT t FROM Users t WHERE t.password = :password")})
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
+    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
+    @NamedQuery(name = "Users.findByMail", query = "SELECT u FROM Users u WHERE u.mail = :mail"),
+    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
+    @NamedQuery(name = "Users.findByFirstname", query = "SELECT u FROM Users u WHERE u.firstname = :firstname"),
+    @NamedQuery(name = "Users.findByRights", query = "SELECT u FROM Users u WHERE u.rights = :rights"),
+    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
 public class Users implements Serializable
 {
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "users")
-    private FriendsRelation friendsRelation;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "secondId")
-    private List<FriendsRelation> friendsRelationList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,18 +74,22 @@ public class Users implements Serializable
     @NotNull
     @Column(name = "RIGHTS")
     private String rights = Utils.UNKNOWN_RIGHTS;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "firstId")
+    private List<FriendsRelation> friendsRelationList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "secondId")
+    private List<FriendsRelation> friendsRelationList1;
 
     public Users() {
     }
-    
-    public Users(Users tUser)
+
+    public Users(Users user)
     {
-        this.id=tUser.id;
-        this.mail=tUser.mail;
-        this.name=tUser.name;
-        this.firstname=tUser.firstname;
-        this.password=tUser.password;
-        this.rights=tUser.rights;
+        this.id=user.id;
+        this.mail=user.mail;
+        this.name=user.name;
+        this.firstname=user.firstname;
+        this.password=user.password;
+        this.rights=user.rights;
     }
 
     public Users(Integer id) {
@@ -109,7 +108,7 @@ public class Users implements Serializable
     public Integer getId() {
         return this.id==null?-1:this.id;
     }
-    
+
     public String getFieldValue(String fieldName)
     {
         try
@@ -178,28 +177,28 @@ public class Users implements Serializable
     public String getPassword() {
         return password;
     }
-    
+
     public void setRights(String rights)
     {
         if(Utils.getEnumRights().contains(rights))
         {
-            this.rights = rights;
-        }
+        this.rights = rights;
+    }
         else
         {
 //            ApplicationLogger.writeWarning("Les droits ne sont pas corrects");
         }
     }
-    
+
     public String getRights() {
         return this.rights;
     }
-    
+
     public void setEncryptedPassword(byte[] md5)
     {
         this.password=new String(md5/*,"UTF-8"*/);
     }
-    
+
     public void setPassword(String password)
     {
         if(password.isEmpty())
@@ -221,6 +220,24 @@ public class Users implements Serializable
         md.update(password.getBytes(/*"UTF-8"*/));
         byte[] md5 = md.digest();
         this.password=new String(md5/*,"UTF-8"*/);
+    }
+
+    @XmlTransient
+    public List<FriendsRelation> getFriendsRelationList() {
+        return friendsRelationList;
+    }
+
+    public void setFriendsRelationList(List<FriendsRelation> friendsRelationList) {
+        this.friendsRelationList = friendsRelationList;
+    }
+
+    @XmlTransient
+    public List<FriendsRelation> getFriendsRelationList1() {
+        return friendsRelationList1;
+    }
+
+    public void setFriendsRelationList1(List<FriendsRelation> friendsRelationList1) {
+        this.friendsRelationList1 = friendsRelationList1;
     }
 
     @Override
@@ -269,7 +286,7 @@ public class Users implements Serializable
         }
         return true;
     }
-    
+
     public String getFullString()
     {
         return "entity.Users{" + "id=" + id + ", mail=" + mail + ", name=" + name + ", firstname=" + firstname + ", rights=" + rights + '}';
@@ -280,22 +297,5 @@ public class Users implements Serializable
     {
         return this.firstname+" "+this.name+" ["+this.rights+"](id="+this.id+")";
     }
-
-    public FriendsRelation getFriendsRelation() {
-        return friendsRelation;
-    }
-
-    public void setFriendsRelation(FriendsRelation friendsRelation) {
-        this.friendsRelation = friendsRelation;
-    }
-
-    @XmlTransient
-    public List<FriendsRelation> getFriendsRelationList() {
-        return friendsRelationList;
-    }
-
-    public void setFriendsRelationList(List<FriendsRelation> friendsRelationList) {
-        this.friendsRelationList = friendsRelationList;
-    }
-
+    
 }

@@ -4,10 +4,10 @@
 -- |                 DE LA TABLE USERS                   | --
 -- '=====================================================' --
 -------------------------------------------------------------
--- DATABSE: 		administration_db [root on ROOT]
--- URL:				jdbc:derby://localhost/administration_db
+-- DATABSE: 		msmdb [root on ROOT]
+-- URL:				jdbc:derby://localhost:1527/msmdb
 -- AUTHOR:			Brian GOHIER
--- DATE:			2013-06-13 13:27
+-- DATE:			2013-08-18 13:27
 -------------------------------------------------------------
 
 

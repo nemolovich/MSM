@@ -8,14 +8,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FriendsRelation.findAll", query = "SELECT f FROM FriendsRelation f"),
-    @NamedQuery(name = "FriendsRelation.findByFirstId", query = "SELECT f FROM FriendsRelation f WHERE f.firstId = :firstId")})
+    @NamedQuery(name = "FriendsRelation.findById", query = "SELECT f FROM FriendsRelation f WHERE f.id = :id")})
 public class FriendsRelation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "FIRST_ID")
-    private Integer firstId;
-    @JoinColumn(name = "FIRST_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Users users;
+    @Column(name = "ID")
+    private Integer id;
+    @JoinColumn(name = "FIRST_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Users firstId;
     @JoinColumn(name = "SECOND_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Users secondId;
@@ -45,24 +45,24 @@ public class FriendsRelation implements Serializable {
     public FriendsRelation() {
     }
 
-    public FriendsRelation(Integer firstId) {
-        this.firstId = firstId;
+    public FriendsRelation(Integer id) {
+        this.id = id;
     }
 
-    public Integer getFirstId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Users getFirstId() {
         return firstId;
     }
 
-    public void setFirstId(Integer firstId) {
+    public void setFirstId(Users firstId) {
         this.firstId = firstId;
-    }
-
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
     }
 
     public Users getSecondId() {
@@ -75,9 +75,8 @@ public class FriendsRelation implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (this.firstId != null ? this.firstId.hashCode() : 0);
-        hash = 53 * hash + (this.secondId != null ? this.secondId.hashCode() : 0);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -100,11 +99,12 @@ public class FriendsRelation implements Serializable {
     }
 
     public String getFullString() {
-        return "entity.FriendsRelation{" + "firstId=" + firstId + ", users=" + users + ", secondId=" + secondId + '}';
+        return "entity.FriendsRelation{" + "firstId=" + firstId + ", secondId=" + secondId + '}';
     }
     
     @Override
     public String toString() {
         return "Relation between: " + firstId + " and" + secondId;
     }
+    
 }
