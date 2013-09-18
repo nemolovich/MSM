@@ -33,6 +33,20 @@
                     </p:selectOneMenu>
                     
                     <h:outputText id="FriendSelection" value="Select Friends" style="visibility:hidden"/>
+                    <h:outputText value="SelectedFriends" style="visibility:hidden"/>                       
+                </h:panelGrid>
+                
+                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}" 
+                                    mode="advanced"
+                                    dragDropSupport="true"  
+                                    update="messages"
+                                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+  
+                <p:growl id="messages" showDetail="true"/>  
+                
+                <h:panelGrid columns="2" style="float:right">
+                    <h:button value="Create"/>
+                    <h:button value="Cancel"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>
