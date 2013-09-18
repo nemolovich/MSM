@@ -273,9 +273,7 @@ h1
     background-color:                   rgba(100,0,0,0.6);
 }
 
-#growl_container .ui-growl-icon-close:active,
-#clientCreate\:growlWizard_container .ui-growl-icon-close:active,
-#clientUpdate\:growlWizard_container .ui-growl-icon-close:active
+#growl_container .ui-growl-icon-close:active
 {
     background-color:                   rgba(255,100,100,0.8);
 }

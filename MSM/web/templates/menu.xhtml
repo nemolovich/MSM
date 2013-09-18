@@ -38,7 +38,8 @@
                                     icon="ui-icon-security"
                                     url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
                     </p:submenu>
-                    <p:submenu label="Journal">
+                    <p:submenu label="Log"
+                               rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}">
                         <p:menuitem value="Display"
                                     icon="ui-icon-document"
                                     title="Display the server log"

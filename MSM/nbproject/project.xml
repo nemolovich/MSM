@@ -10,7 +10,19 @@
                     <file>${reference.MSM_EJB.dist}</file>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
                     <file>${libs.primefaces.classpath}</file>
+=======
+                    <file>${libs.PrimeFace 3.4.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${libs.Commons.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${libs.iText_2.1.7.classpath}</file>
+>>>>>>> 049dc451dfd1f672ebb2ce0816dcf77fb014a755
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
@@ -23,7 +35,11 @@
             </test-roots>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
+<<<<<<< HEAD
             <definitions>.././lib/nblibraries.properties</definitions>
+=======
+            <definitions>.\lib\nblibraries.properties</definitions>
+>>>>>>> 049dc451dfd1f672ebb2ce0816dcf77fb014a755
         </libraries>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
             <reference>

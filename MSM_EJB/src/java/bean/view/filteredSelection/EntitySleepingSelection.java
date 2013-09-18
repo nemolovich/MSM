@@ -4,8 +4,8 @@
  */
 package bean.view.filteredSelection;
 
-import bean.log.ApplicationLogger;
 import bean.Utils;
+import bean.log.ApplicationLogger;
 import bean.view.struct.EntityView;
 import java.io.Serializable;
 import java.lang.reflect.Method;

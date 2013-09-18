@@ -4,9 +4,9 @@
  */
 package validator;
 
-import bean.log.ApplicationLogger;
 import bean.UserLogin;
 import bean.facade.UsersFacade;
+import bean.log.ApplicationLogger;
 import entity.Users;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

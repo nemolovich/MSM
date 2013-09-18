@@ -18,7 +18,7 @@ import javax.inject.Named;
  *
  * @author Brian GOHIER
  */
-@Named(value = "UsersView")
+@Named(value = "usersView")
 @SessionScoped
 public class UsersView extends EntityView<Users, UsersFacade>
 {

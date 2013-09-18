@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.ResizeEvent; 
 import org.primefaces.event.ToggleEvent;
@@ -30,10 +29,9 @@ public class UserLogin implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    @Inject
     private Users user;
     @EJB
-    private UsersFacade userFacade;
+    private UsersFacade usersFacade;
     private String loginMail="";
     private String template="unknown";
     private int loginTry=0;
@@ -278,10 +276,9 @@ public class UserLogin implements Serializable
     
     public void sessionBlockFor(int minutes)
     {
-        Utils.displayMessage(FacesMessage.SEVERITY_ERROR, template, template);
-//        ApplicationLogger.writeWarning("La session pour l'utilisateur: "+
-//                this.getFirstname()+" "+this.getName()+
-//                " ["+this.getRights()+"] a été bloquée pour "+minutes+" minutes");
+        ApplicationLogger.writeWarning("La session pour l'utilisateur: "+
+                this.getFirstname()+" "+this.getName()+
+                " ["+this.getRights()+"] a été bloquée pour "+minutes+" minutes");
         long currentTime=Calendar.getInstance().getTimeInMillis();
         this.nextTryTime=currentTime+60000*minutes;
         this.blocked=true;
@@ -309,9 +306,9 @@ public class UserLogin implements Serializable
     
     public void unLock()
     {
-//        ApplicationLogger.writeWarning("La session pour l'utilisateur: "+
-//                this.getFirstname()+" "+this.getName()+
-//                " ["+this.getRights()+"] a été débloquée");
+        ApplicationLogger.writeWarning("La session pour l'utilisateur: "+
+                this.getFirstname()+" "+this.getName()+
+                " ["+this.getRights()+"] a été débloquée");
         this.blocked=false;
     }
     
@@ -397,14 +394,14 @@ public class UserLogin implements Serializable
     
     public void setUser(Users user)
     {
-//        ApplicationLogger.writeInfo("Connexion de l'utilisateur: "+
-//                user.toString());
+        ApplicationLogger.writeInfo("Connexion de l'utilisateur: "+
+                user.toString());
         this.user=user;
     }
     
     public Users getUser()
     {
-        for(Users u:this.userFacade.findAll())
+        for(Users u:this.usersFacade.findAll())
         {
             if(u.equals(this.user))
             {
@@ -430,7 +427,7 @@ public class UserLogin implements Serializable
     
     public String saveAccount()
     {
-        this.userFacade.persist(this.user);
+        this.usersFacade.persist(this.user);
         return null;
     }
     
@@ -441,8 +438,8 @@ public class UserLogin implements Serializable
     
     public String logout()
     {
-//        ApplicationLogger.writeInfo("Déconnexion de l'utilisateur: "+
-//                this.user.toString());
+        ApplicationLogger.writeInfo("Déconnexion de l'utilisateur: "+
+                this.user.toString());
         this.user=null;
         this.template="unknown";
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

@@ -36,7 +36,11 @@ is divided into following sections:
         <property file="nbproject/private/private.properties"/>
     </target>
     <target name="-pre-init-libraries">
+<<<<<<< HEAD
         <property location=".././lib/nblibraries.properties" name="libraries.path"/>
+=======
+        <property location="..\.\lib\nblibraries.properties" name="libraries.path"/>
+>>>>>>> 049dc451dfd1f672ebb2ce0816dcf77fb014a755
         <dirname file="${libraries.path}" property="libraries.dir.nativedirsep"/>
         <pathconvert dirsep="/" property="libraries.dir">
             <path path="${libraries.dir.nativedirsep}"/>
