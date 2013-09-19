@@ -7,6 +7,8 @@ package bean.view;
 import bean.facade.FriendsRelationFacade;
 import bean.view.struct.EntityView;
 import entity.FriendsRelation;
+import entity.Users;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -27,6 +29,23 @@ public class FriendsRelationView extends EntityView<FriendsRelation, FriendsRela
     public FriendsRelationView()
     {
         super(FriendsRelation.class,"relations/friends");
+    }
+    
+    public List<Users> getFriendsFor(Users user)
+    {
+        List<Users> list=new ArrayList<Users>();
+        for(FriendsRelation fr:this.getEntries())
+        {
+            if(fr.getFirstId().equals(user))
+            {
+                list.add(fr.getSecondId());
+            }
+            else if(fr.getSecondId().equals(user))
+            {
+                list.add(fr.getFirstId());
+            }
+        }
+        return list;
     }
     
     @Override

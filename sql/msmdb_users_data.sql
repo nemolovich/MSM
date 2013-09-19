@@ -12,46 +12,50 @@
 
 
 ----- Supprime la table si elle existe, sinon commenter -----
--- DELETE FROM ROOT.USERS;
+ALTER TABLE ROOT.FRIENDS_RELATION DROP CONSTRAINT FRIENDS_RELATION_FIRST_ID_FK;
+ALTER TABLE ROOT.FRIENDS_RELATION DROP CONSTRAINT FRIENDS_RELATION_SECOND_ID_FK;
+DELETE FROM ROOT.FRIENDS_RELATION;
+ALTER TABLE ROOT.FRIENDS_RELATION ALTER COLUMN ID RESTART WITH 1;
+DELETE FROM ROOT.USERS;
 ALTER TABLE ROOT.USERS ALTER COLUMN ID RESTART WITH 1;
 
------------------ Création des utilisateurs -----------------
+----------------- Crï¿½ation des utilisateurs -----------------
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user1', 'user', '1', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user2', 'user', '2', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user3', 'user', '3', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user4', 'user', '4', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user5', 'user', '5', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user6', 'user', '6', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
 INSERT INTO ROOT.USERS
 		(MAIL, "NAME", FIRSTNAME, RIGHTS, PASSWORD) 
 	VALUES ('user7', 'user', '7', 'USER',
-				'!#/)zW¥§C‰JJ€Ã                ');
+				'!#/)zWï¿½ï¿½Cï¿½JJï¿½ï¿½                ');
 
------------------ Création des relations ------------------
+----------------- Crï¿½ation des relations ------------------
 
 INSERT INTO ROOT.FRIENDS_RELATION (FIRST_ID, SECOND_ID)
 	VALUES (1,2);
@@ -84,16 +88,16 @@ INSERT INTO ROOT.FRIENDS_RELATION (FIRST_ID, SECOND_ID)
 	VALUES (5,7);
 
 INSERT INTO ROOT.FRIENDS_RELATION (FIRST_ID, SECOND_ID)
-	VALUES (6,5);
+	VALUES (6,7);
 	
 INSERT INTO ROOT.FRIENDS_RELATION (FIRST_ID, SECOND_ID)
-	VALUES (6,7);
+	VALUES (6,1);
 
 INSERT INTO ROOT.FRIENDS_RELATION (FIRST_ID, SECOND_ID)
-	VALUES (7,7);
+	VALUES (7,1);
 	
 INSERT INTO ROOT.FRIENDS_RELATION (FIRST_ID, SECOND_ID)
-	VALUES (7,1);
+	VALUES (7,2);
 
 -- File successfully loaded!
 ;

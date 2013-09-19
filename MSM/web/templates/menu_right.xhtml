@@ -11,19 +11,35 @@
         <f:view>
             <h:form id="menu_right_form">
                 <p:dataTable id="friendsMenuDataTable"
-                             value="#{usersMultiView.getData(usersView.entries)}"
+                             value="#{usersMultiView.getData(
+                                      friendsRelationView.getFriendsFor(
+                                      userLogin.user))}"
                              var="user"
                              widgetVar="friendsMenuTable"
                              rowIndexVar="index"
-                             emptyMessage="No friends have"
+                             emptyMessage="No friend has been found"
                              paginator="false"
                              sortBy="#{user.firstname}"
-                             selection="#{taskView.entity}"
+                             paginatorPosition="bottom"
+                             
+                             selection="#{usersView.entity}"
                              selectionMode="single">
-                    <p:column>
+                    
+                    <p:column footerText="Rechercher: "
+                              
+                              filterBy="#{user.firstname} or #{user.name}"
+                              filterMatchMode="contains"
+                              filterPosition="bottom"
+                              filterStyle="display:inline;margin-left:10px;">
                         <h:outputText value="#{user.firstname} #{user.name}"/>
                     </p:column>
+                    
                 </p:dataTable>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        friendsMenuTable.filter();
+                    });
+                </script>
             </h:form>
         </f:view>
     </h:body>

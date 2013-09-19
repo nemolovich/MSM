@@ -253,25 +253,15 @@ public class Users implements Serializable
         return hash;
     }
 
-    /**
-     * On créer un equals personnalisé pour pouvoir comparer cette classe avec
-     * la classe {@link User}
-     */
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
-        // On utilise ici isAssignable from car la classe User 
-        // est un extension de la classe Users
-        if (obj.getClass().isAssignableFrom(this.getClass())) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
         final Users other = (Users) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
         if ((this.mail == null) ? (other.mail != null) : !this.mail.equals(other.mail)) {
             return false;
         }
@@ -279,6 +269,9 @@ public class Users implements Serializable
             return false;
         }
         if ((this.firstname == null) ? (other.firstname != null) : !this.firstname.equals(other.firstname)) {
+            return false;
+        }
+        if ((this.password == null) ? (other.password != null) : !this.password.equals(other.password)) {
             return false;
         }
         if ((this.rights == null) ? (other.rights != null) : !this.rights.equals(other.rights)) {
