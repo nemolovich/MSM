@@ -6,7 +6,7 @@
 -------------------------------------------------------------
 -- DATABSE: 		msmdb [root on ROOT]
 -- URL:				jdbc:derby://localhost:1527/msmdb
--- AUTHOR:			MaÃ«l BARBIN
+-- AUTHOR:			Maël BARBIN
 -- DATE:			2013-09-18 13:27
 -------------------------------------------------------------
 
@@ -16,7 +16,7 @@ DELETE FROM ROOT.ALBUMS;
 ALTER TABLE ROOT.ALBUMS ALTER COLUMN ID RESTART WITH 1;
 DROP TABLE ROOT.ALBUMS;
 
----------------- Crï¿½ation de la table ALBUMS -----------------
+---------------- Création de la table ALBUMS -----------------
 -- TABLE:			ALBUMS
 -- DESCRIPTION: 	Albums users table
 -- attribute visibility :  0-private 1-public 2-Friends
@@ -31,15 +31,15 @@ CREATE TABLE ROOT.ALBUMS (
 	);
 
 ------- Permet de ne laisser l'identifiant '1' libre --------
--- Redï¿½marre le compteur ï¿½ '0', crï¿½ation d'admin temporaire
---  prenant alors en ID '0', prochaine entrï¿½e ï¿½ '1'
+-- Redémarre le compteur à '0', création d'admin temporaire
+--  prenant alors en ID '0', prochaine entrée à '1'
  ALTER TABLE ROOT.ALBUMS ALTER COLUMN ID RESTART WITH 0;
 
----------- Crï¿½ation d'un administrateur par dï¿½faut ----------
+---------- Création d'un administrateur par défaut ----------
 -- LOGIN (mail):		admin
 -- PASSWORD:			admin
--- /!\ Ne pas oublier de supprimer cette entrï¿½e aprï¿½s  /!\ --
--- /!\ avoir crï¿½ï¿½ votre administrateur via l'interface /!\ --
+-- /!\ Ne pas oublier de supprimer cette entrée après  /!\ --
+-- /!\ avoir créé votre administrateur via l'interface /!\ --
 -- /!\ principale                                      /!\ --
 INSERT INTO ROOT.ALBUMS
 		(ID_USR, "NAME", VISIBILITY) 
