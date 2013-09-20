@@ -4,13 +4,16 @@
  */
 package bean;
 
+import bean.licence.LicenseReader;
 import bean.log.ApplicationLogger;
+import entity.Users;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -48,6 +51,10 @@ public class Utils
      * Version de l'application
      */
     public static final double APPLICATION_VERSION=1.0;
+    /**
+     * Auteurs de l'application
+     */
+    public static final String APPLICATION_AUTHORS="Maël BARBIN & Brian GOHIER";
     /**
      * Date de déploiement de l'application
      */
@@ -98,6 +105,10 @@ public class Utils
         return APPLICATION_VERSION;
     }
 
+    public static String APPLICATION_AUTHORS() {
+        return APPLICATION_AUTHORS;
+    }
+    
     public static String APPLICATION_FULLNAME() {
         return APPLICATION_FULLNAME;
     }

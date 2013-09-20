@@ -10,6 +10,7 @@ import bean.view.struct.EntityView;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import javax.faces.model.SelectItem;
@@ -28,6 +29,7 @@ public abstract class EntitySleepingSelection<C> implements Serializable
                     new SelectItem("true","Inactif","Affiche les éléments innactifs")
                 };
     private List<C> filteredEntities;
+    private List<C> revertFilteredEntities;
     private boolean displaySleepingEntities=false;
     private static boolean DISPLAYED_ERROR=false;
 
@@ -98,6 +100,41 @@ public abstract class EntitySleepingSelection<C> implements Serializable
         return EntityView.SLEEPING_STATES;
     }
     
+    public List<C> getRevertFilteredEntities()
+    {
+        List<C> temp=this.revertFilteredEntities!=null?
+                new ArrayList<C>(this.revertFilteredEntities):
+                new ArrayList<C>();
+        if(this.revertFilteredEntities!=null)
+        {
+            System.err.println(Arrays.toString(this.revertFilteredEntities.toArray())+", "+
+                    Arrays.toString(this.getFullList().toArray()));
+            try
+            {
+                for(C c:temp)
+                {
+                    Boolean sleeping=this.isSleepingCall(c);
+                    if(c!=null&&(sleeping==null||!sleeping))
+                    {
+                        this.revertFilteredEntities.remove(c);
+                    }
+                }
+            }
+            catch (ConcurrentModificationException ex)
+            {
+                ApplicationLogger.writeError("Accès concurrent à la méthode"
+                        + " \"getRevertFilteredEntities\" pour la liste des données de"
+                        + " la classe \""+this.entityClass.getName()+"\"", ex);
+                return new ArrayList<C>();
+            }
+        }
+        if(this.revertFilteredEntities==null&&!DISPLAYED_ERROR)
+        {
+            return this.getFullList()!=null?this.getFullList():new ArrayList<C>();
+        }
+        return this.revertFilteredEntities;
+    }
+    
     public List<C> getFilteredEntities()
     {
         List<C> temp=this.filteredEntities!=null?
@@ -141,5 +178,10 @@ public abstract class EntitySleepingSelection<C> implements Serializable
     public void setFilteredEntities(List<C> filteredEntities)
     {
         this.filteredEntities = filteredEntities;
+    }
+
+    public void setRevertFilteredEntities(List<C> revertFilteredEntities)
+    {
+        this.revertFilteredEntities = revertFilteredEntities;
     }
 }

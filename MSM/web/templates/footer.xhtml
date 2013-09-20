@@ -1,13 +1,24 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
     </h:head>
     <h:body>
         <h:outputText value="#{utils.APPLICATION_NAME()} - #{utils.APPLICATION_FULLNAME()} - 
                       #{utils.dayDateFormat(utils.APPLICATION_DATE())} - 
                       Version #{utils.APPLICATION_VERSION()}"/>
+        <h:outputText value=" | Created by #{utils.APPLICATION_AUTHORS()} 
+                      all rights reserved: "/>
+        <p:commandLink id="displayLicense"
+                       value="display license"
+                       action="javascript:void(0);"
+                       onclick="window.open('/#{utils.APPLICATION_NAME()}/#{license.licenseString}',
+                          'Relevé details','dependent=yes, menubar=no,\
+                          toolbar=no, status=no, scrollbars=yes,\
+                          resizable=no, width=500, height=600');return false;"
+                       title="Display the license file"/>
     </h:body>
 </html>
 

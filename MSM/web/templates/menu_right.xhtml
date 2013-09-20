@@ -9,37 +9,94 @@
     </h:head>
     <h:body>
         <f:view>
-            <h:form id="menu_right_form">
-                <p:dataTable id="friendsMenuDataTable"
-                             value="#{usersMultiView.getData(
-                                      friendsRelationView.getFriendsFor(
-                                      userLogin.user))}"
-                             var="user"
-                             widgetVar="friendsMenuTable"
-                             rowIndexVar="index"
-                             emptyMessage="No friend has been found"
-                             paginator="false"
-                             sortBy="#{user.firstname}"
-                             paginatorPosition="bottom"
-                             
-                             selection="#{usersView.entity}"
-                             selectionMode="single">
-                    
-                    <p:column footerText="Rechercher: "
-                              
-                              filterBy="#{user.firstname} or #{user.name}"
-                              filterMatchMode="contains"
-                              filterPosition="bottom"
-                              filterStyle="display:inline;margin-left:10px;">
-                        <h:outputText value="#{user.firstname} #{user.name}"/>
-                    </p:column>
-                    
-                </p:dataTable>
-                <script type="text/javascript">
-                    $(document).ready(function(){
-                        friendsMenuTable.filter();
-                    });
-                </script>
+            <h:form id="friendsMenuDataForm">
+                <p:accordionPanel multiple="true">
+                    <p:tab title="Online friends">
+                        <p:dataTable id="friendsMenuDataTable"
+                                     value="#{usersMultiView.getData(
+                                              friendsRelationView.getFriendsFor(
+                                              userLogin.user))}"
+                                     var="user"
+                                     widgetVar="friendsMenuTable"
+                                     rowIndexVar="index"
+                                     emptyMessage="No friend has been found"
+                                     paginator="false"
+                                     sortBy="#{user.firstname}"
+                                     paginatorPosition="bottom"
+                                     filteredValue="#{usersMultiView.filteredEntities}"
+                                     selection="#{usersView.entity}"
+                                     selectionMode="single">
+
+                            <p:column id="friendFilter"
+                                      headerText=""
+                                      filterBy="#{user.firstname} or #{user.name}"
+                                      filterMatchMode="contains"
+                                      filterPosition="bottom"
+                                      filterStyle="display:none;">
+                                <f:facet name="header">
+                                    <p:outputPanel style="float:left;">
+                                        <h:outputText value="Search:"/>
+                                        <p:inputText id="globalFilter"
+                                                     onkeyup="doAfterInterval('forceFilter(friendsMenuTable);',1);"
+                                                     style="width:150px;margin-left:20px;"
+                                                     title="Search a friend">
+                                        </p:inputText>
+                                    </p:outputPanel>
+                                </f:facet>
+                                <div class="green_icon"
+                                      style="display:inline-block;vertical-align:bottom;">
+                                    <span class="ui-icon ui-corner-all ui-icon-circle-arrow-e"/>
+                                </div>
+                                <h:outputText value="#{user.firstname} #{user.name}"
+                                              style="display:inline-block;margin-left:10px;"/>
+                            </p:column>
+
+                        </p:dataTable>
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                friendsMenuTable.filter();
+                            });
+                        </script>
+                    </p:tab>
+                    <p:tab title="Offline friends">
+                        <p:dataTable id="friendsMenuRevertDataTable"
+                                     value="#{usersMultiView.getData(
+                                              friendsRelationView.getFriendsFor(
+                                              userLogin.user))}"
+                                     var="user"
+                                     widgetVar="friendsMenuTableRevert"
+                                     rowIndexVar="index"
+                                     emptyMessage="No friend has been found"
+                                     paginator="false"
+                                     styleClass="table_headers_hidden"
+                                     sortBy="#{user.firstname}"
+                                     paginatorPosition="bottom"
+                                     filteredValue="#{usersMultiView.revertFilteredEntities}"
+                                     selection="#{usersView.entity}"
+                                     selectionMode="single">
+
+                            <p:column>
+                                <f:facet name="header"
+                                         class="red_icon">
+                                    Truc
+                                </f:facet>
+                                <div class="red_icon"
+                                      style="display:inline-block;vertical-align:bottom;">
+                                    <span class="ui-icon ui-corner-all ui-icon-circle-close"/>
+                                </div>
+                                <h:outputText value="#{user.firstname} #{user.name}"
+                                              style="display:inline-block;margin-left:10px;
+                                              font-style:italic;"/>
+                            </p:column>
+
+                        </p:dataTable>
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                friendsMenuTableRevert.filter();
+                            });
+                        </script>
+                    </p:tab>
+                </p:accordionPanel>
             </h:form>
         </f:view>
     </h:body>

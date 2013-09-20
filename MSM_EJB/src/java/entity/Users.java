@@ -108,6 +108,11 @@ public class Users implements Serializable
     public Integer getId() {
         return this.id==null?-1:this.id;
     }
+    
+    public boolean getSleeping()
+    {
+        return !ConnectedUser.USERS_LIST().contains(this);
+    }
 
     public String getFieldValue(String fieldName)
     {

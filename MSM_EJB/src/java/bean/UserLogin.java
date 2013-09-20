@@ -6,6 +6,7 @@ package bean;
 
 import bean.facade.UsersFacade;
 import bean.log.ApplicationLogger;
+import entity.ConnectedUser;
 import entity.Users;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -397,6 +398,7 @@ public class UserLogin implements Serializable
         ApplicationLogger.writeInfo("Connexion de l'utilisateur: "+
                 user.toString());
         this.user=user;
+        ConnectedUser.addUserConnexion(user);
     }
     
     public Users getUser()
@@ -440,6 +442,7 @@ public class UserLogin implements Serializable
     {
         ApplicationLogger.writeInfo("Déconnexion de l'utilisateur: "+
                 this.user.toString());
+        ConnectedUser.deleteUserConnexion(user);
         this.user=null;
         this.askedURL=null;
         this.template="unknown";

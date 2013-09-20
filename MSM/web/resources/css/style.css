@@ -2,8 +2,7 @@
     Document   : style
     Created on : 17 sept. 2013, 14:41:37
     Author     : nemo
-    Description:
-        Purpose of the stylesheet follows.
+    Description: Purpose of the stylesheet follows.
 */
 
 /*********************************
@@ -12,80 +11,80 @@
 
 #top
 {
-    position:               relative;
-    background-color:       #036fab;
-    color:                  white;
-    padding:                5px;
-    margin:                 0px 0px 10px 0px;
-    text-align:             right;
+    position:                           relative;
+    background-color:                   #036fab;
+    color:                              white;
+    padding:                            5px;
+    margin:                             0px 0px 10px 0px;
+    text-align:                         right;
 }
 
 #bottom
 {
-    position:               relative;
-    bottom:                 0;
-    background-color:       #c2dfef;
-    padding:                5px;
-    margin:                 10px 0px 0px 0px;
+    position:                           relative;
+    bottom:                             0;
+    background-color:                   #c2dfef;
+    padding:                            5px;
+    margin:                             10px 0px 0px 0px;
 }
 
 #left
 {
-    float:                  left;
-    background-color:       #ece3a5;
-    padding:                5px;
-    width:                  200px;
+    float:                              left;
+    background-color:                   #ece3a5;
+    padding:                            5px;
+    width:                              200px;
 }
 
 #right
 {
-    float:                  right;
-    background-color:       #ece3a5;
-    padding:                5px;
-    width:                  200px;
+    float:                              right;
+    background-color:                   #ece3a5;
+    padding:                            5px;
+    width:                              200px;
 }
 
 .center_content
 {
-    position:               relative;
-    background-color:       #dddddd;
-    padding:                5px;
+    position:                           relative;
+    background-color:                   #dddddd;
+    padding:                            5px;
 }
 
 .full_content
 {
-    position:               relative;
-    background-color:       #dddddd;
-    padding:                5px;
+    position:                           relative;
+    background-color:                   #dddddd;
+    padding:                            5px;
 }
 
 .left_content
 {
-    background-color:       #dddddd;
-    padding:                5px;
-    margin-left:            220px;
-    min-height:             300px;
+    background-color:                   #dddddd;
+    padding:                            5px;
+    margin-left:                        220px;
+    min-height:                         300px;
 }
 
 .right_content
 {
-    background-color:       #dddddd;
-    padding:                5px;
-    margin:                 0px 220px 0px 220px;
+    background-color:                   #dddddd;
+    padding:                            5px;
+    margin:                             0px 220px 0px 220px;
 }
 
 #top a:link, #top a:visited
 {
-  color:                    white;
-  font-weight:              bold;
-  text-decoration:          none;
+  color:                                white;
+  font-weight:                          bold;
+  text-decoration:                      none;
 }
 
 #top a:link:hover, #top a:visited:hover
 {
-    color:                  black;
-    font-weight:            bold;
-    text-decoration:        underline;
+    color:                              black;
+    font-weight:                        bold;
+    text-decoration:                    underline;
 }
 
 /*********************************
@@ -222,6 +221,16 @@ h1
 {
     vertical-align:                     top !important;
     white-space:                        nowrap !important;
+}
+
+.ui-accordion .ui-accordion-content
+{
+    padding:                            0 !important;
+}
+
+.table_headers_hidden thead
+{
+    display:                            none;
 }
 
 /*********************************
@@ -654,7 +663,46 @@ TABLE.infos_header
 {
     background-image:                   url("/MSM/resources/img/ui-icon-security.png") !important;
 }
+
+/*********************************
+ * Online/Offline Users
+ *********************************/
+
+.ui-datatable-even.sleeping_elmt
+{
+    color:                              #4f4f4f !important;
+    background-color:                   #AFAFBF !important;
+}
+
+.ui-datatable-odd.sleeping_elmt
+{
+    color:                              #4f4f4f !important;
+    background-color:                   #AFAFAF !important;
+}
+
+.ui-chkbox.ui-widget.small_check
+{
+    cursor:                             pointer;
+    margin:                             2px;
+    margin-left:                        5px;
+    vertical-align:                     bottom !important;
+}
+
+.ui-chkbox.ui-widget.small_check,
+.ui-chkbox.ui-widget.small_check div
+{
+    width:                              10px !important;
+    height:                             10px !important;
+}
+
+.ui-chkbox.ui-widget.small_check span
+{
+    background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_2e83ff_256x240.png.xhtml?ln=primefaces-aristo") !important;
+    width:                              12px !important;
+    height:                             12px !important;
+    background-position:                -67px -148px !important;
+}
+
 /*********************************
  * 
  *********************************/
-
