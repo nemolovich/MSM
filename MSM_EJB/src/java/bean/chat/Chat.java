@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.primefaces.push.PushContext;
+import org.primefaces.push.PushContextFactory;
 
 /**
  * Miaou
@@ -96,6 +98,8 @@ public class Chat
             this.currentIndex=this.getIndexOf(user);
             this.chatOpened=true;
         }
+        PushContext pushContext = PushContextFactory.getDefault().getPushContext();
+        pushContext.push("/chat", "New message :D");
     }
     
     public void deleteConversation(Users user)

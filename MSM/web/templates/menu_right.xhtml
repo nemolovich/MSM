@@ -10,6 +10,13 @@
     <h:body>
         <f:view>
             <h:form id="friendsMenuDataForm">
+                <script type="text/javascript">  
+                    function handleMessage(data) {
+                        console.log("Data: "+data)
+                    }  
+                </script> 
+                <p:socket channel="/chat" onMessage="handleMessage">
+                </p:socket>
                 <p:accordionPanel multiple="true">
                     <p:tab id="onlineFriendsTab"
                            title="Online friends">
