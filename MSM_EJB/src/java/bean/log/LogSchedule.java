@@ -45,9 +45,12 @@ public class LogSchedule
     public void timeOut()
     {
         long act=(new Date()).getTime();
-        System.out.println("Vérification de l'état du journal: "+((act-this.start)/1000)+" secondes");
-        this.start=act;
-        ApplicationLogger.archive(true);
+        if((act-this.start)>175)
+        {
+            System.out.println("Vérification de l'état du journal: "+((act-this.start)/1000)+" secondes");
+            this.start=act;
+            ApplicationLogger.archive(true);
+        }
     }
     
 }

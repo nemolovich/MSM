@@ -117,6 +117,239 @@ function addTitle(id, title)
 }
 
 /**
+ * Configure the chat tab panel
+ * @param {Number} - nbConvers
+ * @return {void}
+ */
+function setChatTabScrollable(nbConvers)
+{
+    setScrollableTabView('chat_tabView',109,nbConvers,292);
+}
+
+/**
+ * Configure a scrollable tabview from his id
+ * @param {String} id - tabView id
+ * @param {Nulber} elmtSize - Size (in px) of the contained elements (title of tab)
+ * @param {Nulber} nbElmt - Total number of elements
+ * @param {Nulber} containerSize - Size (in px) of the container of the tabs
+ * @returns {void}
+ */
+function setScrollableTabView(id,elmtSize,nbElmt,containerSize)
+{
+    if(debug)
+    {
+        console.log("Confirguring scrollable tabview for id: "+id+"\n\
+        with parameters:\n\tnbElmt: "+nbElmt+"\n\telmtSize: "+elmtSize+"\n\
+        \tcontainerSize: "+containerSize);
+    }
+    var tabview=$('#'+id);
+    var list=$('#'+id+' ul');
+    var parentContainer=$('<div></div>');
+    var container=$('<div></div>');
+    parentContainer.attr('class','tab_parent_container');
+    container.attr('class','tab_container');
+    container.appendTo(parentContainer);
+    parentContainer.appendTo(tabview);
+
+    var rightButton=$('<a></a>');
+    var rightSpan=$('<span></span>');
+    rightSpan.appendTo(rightButton);
+    rightButton.attr('class','right-button ui-tabs-navscroller-btn ui-tabs-navscroller-btn-right ui-state-default ui-corner-left');
+
+    rightSpan.attr('class','ui-icon ui-icon-carat-1-w');
+
+    var leftButton=$('<a></a>');
+    var leftSpan=$('<span></span>');
+    leftSpan.appendTo(leftButton);
+    leftButton.attr('class','left-button ui-tabs-navscroller-btn ui-tabs-navscroller-btn-left ui-state-default ui-corner-right');
+
+    leftSpan.attr('class','ui-icon ui-icon-carat-1-e');
+
+    parentContainer.append(rightButton);
+    list.appendTo(container);
+    rightButton.after(container);
+    parentContainer.append(leftButton);
+
+    container.css('width',containerSize-38+"px");
+    list=$('#'+id+' .tab_container ul');
+    list.css('width',elmtSize*(nbElmt+1)+'px');
+    $('#'+id+' .tab_container ul li').css('cursor','pointer');
+    var closeElm=$('#'+id+' .tab_container ul li span.ui-button-icon-left');
+    closeElm.css('float','right');
+    closeElm.css('margin','0');
+    
+    var scrollAnimated=false;
+
+    $('#'+id+' .right-button').click(function()
+    {
+        if(parseInt(list.css('margin-left').replace("px",""))<-10&&
+            !scrollAnimated)
+        {
+            event.preventDefault();
+            scrollAnimated=true;
+            list.animate(
+            {
+                marginLeft: "+="+elmtSize+"px"
+            }, "fast");
+            list.promise().done(function()
+            {
+                scrollAnimated=false;
+            });
+        }
+    });
+
+    $('#'+id+' .right-button').dblclick(function()
+    {
+        this.click();
+    });
+
+    $('#'+id+' .left-button').click(function()
+    {
+        if(parseInt(list.css('margin-left').replace("px",""))>-1*elmtSize*nbElmt+containerSize&&
+            !scrollAnimated)
+        {
+            event.preventDefault();
+            scrollAnimated=true;
+            list.animate(
+            {
+                marginLeft: "-="+elmtSize+"px"
+            }, "fast");
+            list.promise().done(function()
+            {
+                scrollAnimated=false;
+            });
+        }
+    });
+
+    $('#'+id+' .left-button').dblclick(function()
+    {
+        this.click();
+    });
+}
+
+/**
+ * The last index of the client chat tab
+ * @type Number
+ */
+var previous_index=-1;
+
+/**
+ * Displays the content of the conversation with an user.
+ * @param {String} chatId - Chat identifiant
+ * @param {Number} userId - User identifiant
+ * @param {Number} index - Index of the tab
+ * @param {HTMLElement} tab - The tab (click source)
+ * @returns {void}
+ */
+function displayChatTab(chatId, userId, index, tab)
+{
+    var elm;
+    var hiddeDirection,showDirection;
+    if(previous_index===index)
+    {
+        return;
+    }
+    else if(previous_index<index)
+    {
+        hiddeDirection='left';
+        showDirection='right';
+    }
+    else
+    {
+        hiddeDirection='right';
+        showDirection='left';
+    }
+    previous_index=index;
+    $('#'+chatId+' .chatContent').each(function()
+    {
+        if($(this).css('display')==='block')
+        {
+            elm=$(this);
+            elm.hide('slide', {direction: hiddeDirection}, 200);
+        }
+    });
+    elm.promise().done(function()
+    {
+        $('#chatTab_'+userId).show('slide', {direction: showDirection}, 200);
+        $('#friendsMenuDataForm\\:chatTab_button_'+userId).click();
+        $('#'+chatId+' .tab_container ul li').attr('class','ui-state-default');
+        $('#chatTab_'+userId).css('display','block');
+        $(tab).attr('class','ui-state-default ui-tabs-selected ui-state-active ui-corner-bottom');
+    });
+}
+
+/**
+ * Verify if the selected index equals the user index, in this
+ * case it selects the <li> tab of this one
+ * @param {String} chatId - The chat id
+ * @param {Number} currentInd - The current index selected
+ * @param {Number} userId - The user ID
+ * @param {Number} userInd - The user index
+ * @return {void}
+ */
+function verifChatTabIndex(chatId,currentInd,userId,userInd)
+{
+    if(currentInd===userInd)
+    {
+        var tab=$('#chatLi_'+userId);
+        $('#'+chatId+' .tab_container ul li').attr('class','ui-state-default');
+        $('#chatTab_'+userId).css('display','block');
+        $(tab).attr('class','ui-state-default ui-tabs-selected ui-state-active ui-corner-bottom');
+    }
+}
+
+/**
+ * Set if the chat box is opened
+ * @type Boolean
+ */
+var chatDisplay=false;
+
+/**
+ * Setter for the chat displaying value
+ * @param {Boolean} displayed - If true the chat box is set opened
+ * @return {void}
+ */
+function setChatDisplay(displayed)
+{
+    chatDisplay=displayed;
+}
+
+/**
+ * Hides the chat box
+ * @return {void}
+ */
+function hideChat()
+{
+    $('#friendsMenuDataForm\\:friendsChatText').css('display','none');
+    $('#friendsMenuDataForm\\:friendsChatText0').css('display','none');
+    $('#friendsMenuDataForm\\:chatCloser').css('display','none');
+    $('#friendsMenuDataForm\\:friendChat').css('height','auto');
+    chatDisplay=false;
+}
+
+/**
+ * Displays the chat box
+ * @return {Boolean} - opened
+ */
+function showChat()
+{
+    $('#friendsMenuDataForm\\:friendsChatText').css('display','block');
+    $('#friendsMenuDataForm\\:friendsChatText0').css('display','block');
+    $('#friendsMenuDataForm\\:chatCloser').css('display','block');
+    $('#friendsMenuDataForm\\:friendChat').css('height','350px');
+    if(chatDisplay===true)
+    {
+        hideChat();
+        return false;
+    }
+    else
+    {
+        chatDisplay=true;
+        return true;
+    }
+}
+
+/**
  * Inspecte le formulaire contenu dans un <p:dialog> pour
  * vérifier s'il est correct.
  * @param {c} form - La boite de dialogue contenant le formulaire
@@ -493,7 +726,7 @@ var concurrents=[];
 
 /**
  * Affiche un bloque et cache ses éventuels concurrents
- * @param {type} id - Identifiant du bloque à afficher
+ * @param {String} id - Identifiant du bloque à afficher
  * @returns {Boolean} - Vrai si tous ses concurrents on bien été cachés
  */
 function displayBlock(id)
@@ -594,8 +827,8 @@ function indexOf(arr,pair)
 
 /**
  * Indique si un tableau contient l'élément donné
- * @param {type} arr - Le tableau dans lequel chercher
- * @param {type} e - L'élément à rechercher
+ * @param {Array} arr - Le tableau dans lequel chercher
+ * @param {String} e - L'élément à rechercher
  * @returns {Boolean} - Vrai si le tableau contient l'élément recherché
  */
 function containsElement(arr,e)
@@ -731,7 +964,7 @@ function getTimeFormat(value)
  * Modifie le contenu d'un élément (<span> ou autre) depuis son identifiant
  * en prenant le contenu d'un champs input (<([ph]*:)input((Text)*)>)
  * @param {String} spanId - Identifiant de l'élément à changer
- * @param {type} inputId - Identifiant du champs <input>
+ * @param {String} inputId - Identifiant du champs <input>
  * @returns {void}
  */
 function setHTMLSpan(spanId, inputId)

@@ -9,6 +9,7 @@ import bean.Utils;
 import bean.facade.UsersFacade;
 import bean.view.struct.EntityView;
 import entity.Users;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;

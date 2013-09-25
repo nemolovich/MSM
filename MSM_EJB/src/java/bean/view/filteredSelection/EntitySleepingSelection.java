@@ -107,8 +107,6 @@ public abstract class EntitySleepingSelection<C> implements Serializable
                 new ArrayList<C>();
         if(this.revertFilteredEntities!=null)
         {
-            System.err.println(Arrays.toString(this.revertFilteredEntities.toArray())+", "+
-                    Arrays.toString(this.getFullList().toArray()));
             try
             {
                 for(C c:temp)

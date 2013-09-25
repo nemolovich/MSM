@@ -4,6 +4,7 @@
  */
 package entity;
 
+import bean.ConnectedUser;
 import bean.Utils;
 import bean.log.ApplicationLogger;
 import java.io.Serializable;

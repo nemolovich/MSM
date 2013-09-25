@@ -536,59 +536,6 @@ TABLE.infos_header
     background-image:                   url("/MSM/javax.faces.resource/images/ui-icons_2e83ff_256x240.png.xhtml?ln=primefaces-aristo") !important;
 }
 
-.inside_dialog
-{
-    float:                              right;
-    margin:                             0 auto;
-    margin-top:                         5px;
-    margin-right:                       5px;
-    border:                             solid 1px #A8A8A8;
-    border-radius:                      3px;
-    -webkit-border-radius:              3px;
-    -moz-border-radius:                 3px;
-    width:                              auto;
-    height:                             100%;
-    min-height:                         100%;
-    padding:                            15px;
-}
-
-.inside_dialog button.ui-button
-{
-    width:                              16px;
-    height:                             16px;
-    float:                              right;
-    margin-top:                         -18px;
-    margin-right:                       -17px;
-    font-size:                          60%;
-}
-
-.inside_dialog button:not(.ui-state-hover)
-{
-    background:                         none;
-    border:                             none;
-}
-
-.inside_dialog button.ui-state-active
-{
-    border-color:                       #7096AB !important;
-    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_inset-hard_65_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
-    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%); /* FF3.6+ */
-    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))); /* Chrome,Safari4+ */
-    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Chrome10+,Safari5.1+ */
-    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Opera 11.10+ */
-    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* IE10+ */
-    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* W3C */
-    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085B2CB ', endColorstr='#6685B2CB ',GradientType=0 ); /* IE6-9 */
-    color:                              #1C4257;
-}
-
-.inside_dialog button.ui-state-focus
-{
-    box-shadow:                         none;
-    -webkit-box-shadow:                 none;
-    -moz-box-shadow:                    none;
-}
-
 /*********************************
  * Icones personnalisés
  *********************************/
@@ -701,6 +648,260 @@ TABLE.infos_header
     width:                              12px !important;
     height:                             12px !important;
     background-position:                -67px -148px !important;
+}
+
+/*********************************
+ * Chat panel
+ *********************************/
+
+.inside_dialog
+{
+    float:                              right;
+    margin:                             0 auto;
+    margin-top:                         5px;
+    margin-right:                       5px;
+    border:                             solid 1px #A8A8A8;
+    border-radius:                      3px;
+    -webkit-border-radius:              3px;
+    -moz-border-radius:                 3px;
+    width:                              auto;
+    height:                             100%;
+    min-height:                         100%;
+    padding:                            15px;
+}
+
+.chatPanel button.ui-button:not(.sendButton),
+.inside_dialog button.ui-button
+{
+    width:                              16px;
+    height:                             16px;
+    float:                              right;
+    margin-top:                         -18px;
+    margin-right:                       5px;
+    font-size:                          60%;
+}
+
+.chatPanel button.ui-button:not(.sendButton)
+{
+    margin-top:                         -18px;
+}
+
+.chatPanel button:not(.ui-state-hover),
+.inside_dialog button:not(.ui-state-hover)
+{
+    background:                         none;
+    border:                             none;
+}
+
+.chatPanel button.ui-state-active
+.inside_dialog button.ui-state-active
+{
+    border-color:                       #7096AB !important;
+    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_inset-hard_65_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x;
+    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%); /* FF3.6+ */
+    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))); /* Chrome,Safari4+ */
+    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* Opera 11.10+ */
+    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* IE10+ */
+    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085B2CB ', endColorstr='#6685B2CB ',GradientType=0 ); /* IE6-9 */
+    color:                              #1C4257;
+}
+
+.chatPanel button.ui-state-focus
+.inside_dialog button.ui-state-focus
+{
+    box-shadow:                         none;
+    -webkit-box-shadow:                 none;
+    -moz-box-shadow:                    none;
+}
+
+.chatPanel
+{
+    display:block;
+    width:300px;
+    height:350px;
+    background:#F0F0F0;
+    border:1px solid #2F556A;
+    position:absolute;
+    bottom:0;
+    right:5px;
+    box-shadow:-2px -2px 1em #4f4f4f;
+}
+
+.chatContainer
+{
+    border-bottom:1px solid #2F556A;
+    width:100%;
+    height:auto;
+    display:block;
+    cursor:pointer;
+}
+
+.chatHeader
+{
+    padding:3px 0px;
+    display:inline-block;
+    width: 100%;
+    text-align:center;
+    font-weight:bold;
+    text-decoration: none;
+}
+
+.tabview_scrollable ul
+{
+    min-width:		100%;
+    border:		none;
+    white-space:	nowrap;
+}
+
+.tabview_scrollable ul li
+{
+    float:left;
+    width:	104px;
+    height:	18px;
+    padding: 0px;
+}
+
+.tabview_scrollable ul li a
+{
+    padding: 2px 3px !important;
+    font-size: 8pt;
+}
+
+.tabview_scrollable .tab_parent_container
+{
+    display:block;
+    height:20px;
+    width:100%;
+}
+
+.tabview_scrollable .tab_container
+{
+    display:block;
+    width:auto;
+    float:left;
+    overflow-x:auto;
+    overflow-y:hidden;
+    overflow-x:hidden;
+    height:auto;
+    border:1px solid #a8a8a8;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+}
+
+.right-button,
+.left-button
+{
+    display:inline;
+    float:left;
+    height:20px;
+    cursor:pointer;
+}
+
+.tabview_scrollable ul li:not(.ui-tabs-selected):hover,
+.right-button:hover,
+.left-button:hover
+{
+    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x !important;
+    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%) !important; /* FF3.6+ */
+    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.6)), color-stop(100%,rgba(255,255,255,0))) !important; /* Chrome,Safari4+ */
+    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%) !important; /* Chrome10+,Safari5.1+ */
+    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%) !important; /* Opera 11.10+ */
+    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%) !important; /* IE10+ */
+    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%) !important; /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#9985B2CB', endColorstr='#0085B2CB',GradientType=0 ) !important; /* IE6-9 */
+    border:                             1px solid #7096AB !important;
+    -moz-box-shadow:                    0px 0px 8px #85B2CB !important;
+    -webkit-box-shadow:                 0px 0px 8px #85B2CB !important;
+    box-shadow:                         0px 0px 8px #85B2CB !important;
+}
+
+.right-button:active,
+.left-button:active
+{
+    border-color:                       #7096AB !important;
+    background:                         #85B2CB url("/MSM/javax.faces.resource/images/ui-bg_inset-hard_65_85b2cb_1x100.png.xhtml?ln=primefaces-aristo") 50% 50% repeat-x !important;
+    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%) !important; /* FF3.6+ */
+    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))) !important; /* Chrome,Safari4+ */
+    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%) !important; /* Chrome10+,Safari5.1+ */
+    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%) !important; /* Opera 11.10+ */
+    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%) !important; /* IE10+ */
+    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 100%) !important; /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085B2CB ', endColorstr='#6685B2CB ',GradientType=0 ) !important; /* IE6-9 */
+}
+
+.chatContent
+{
+    display:block;
+    height:268px;
+    margin-bottom: 32px;
+    overflow-y: auto;
+}
+
+.chatContent .chatMessage
+{
+    display: block;
+    border: 1px solid #7096AB;
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: 8px;
+    border-radius:                      4px 4px 4px 4px;
+    -webkit-border-radius:              4px 4px 4px 4px;
+    -moz-border-radius:                 4px 4px 4px 4px;
+}
+
+.chatContent .chatMessage.receivedMessage
+{
+    text-align: left;
+    background-color: rgba(150,150,150,0.2);
+    border-color: #C4C4C4;
+    border-radius:                      4px 0px 4px 4px;
+    -webkit-border-radius:              4px 0px 4px 4px;
+    -moz-border-radius:                 4px 0px 4px 4px;
+}
+
+.chatContent .chatMessage.sendingMessage
+{
+    text-align: right;
+    background-color: rgba(50,100,150,0.2);
+    border-color: #85B2CB;
+    border-radius:                      4px 4px 4px 0px;
+    -webkit-border-radius:              4px 4px 4px 0px;
+    -moz-border-radius:                 4px 4px 4px 0px;
+}
+
+.tabview_scrollable .messageSender
+{
+    bottom:26px;
+    display:block;
+    width:100%;
+    position:absolute;
+}
+
+.tabview_scrollable .sendMessage
+{
+    background-color: rgba(50,100,150,0.1) !important;
+    width: 70%;
+    vertical-align: bottom;
+}
+
+.tabview_scrollable .sendButton
+{
+    background-color: rgba(100,200,100,0.7) !important;
+    font-size: 75% !important;
+    margin: 3px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    width: 20%;
+    border: 1px solid #327850 !important;
+    vertical-align: bottom;
+}
+
+.tabview_scrollable .sendButton:hover
+{
+    border: 1px solid #7096AB !important;
 }
 
 /*********************************

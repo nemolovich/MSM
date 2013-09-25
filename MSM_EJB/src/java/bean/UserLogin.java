@@ -4,9 +4,9 @@
  */
 package bean;
 
+import bean.chat.Chat;
 import bean.facade.UsersFacade;
 import bean.log.ApplicationLogger;
-import entity.ConnectedUser;
 import entity.Users;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -87,11 +87,23 @@ public class UserLogin implements Serializable
      * URL demandée
      */
     private String askedURL=null;
+    /**
+     * Chat with other users
+     */
+    private Chat chat;
     
     public UserLogin()
     {
     }
 
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
+    
     public String getMenuLeftID()
     {
         return UserLogin.menuLeftID;
@@ -397,7 +409,16 @@ public class UserLogin implements Serializable
     {
         ApplicationLogger.writeInfo("Connexion de l'utilisateur: "+
                 user.toString());
+        if(this.user!=null)
+        {
+//            ConnectedUser.deleteUserConnexion(this.user);
+        }
+        if(this.chat!=null)
+        {
+            this.chat.clear();
+        }
         this.user=user;
+        this.chat=new Chat();
         ConnectedUser.addUserConnexion(user);
     }
     
@@ -442,7 +463,11 @@ public class UserLogin implements Serializable
     {
         ApplicationLogger.writeInfo("Déconnexion de l'utilisateur: "+
                 this.user.toString());
-        ConnectedUser.deleteUserConnexion(user);
+        ConnectedUser.deleteUserConnexion(this.user);
+        if(this.chat!=null)
+        {
+            this.chat.clear();
+        }
         this.user=null;
         this.askedURL=null;
         this.template="unknown";
