@@ -10,13 +10,38 @@
     <h:body>
         <f:view>
             <h:form id="friendsMenuDataForm">
-                <script type="text/javascript">  
-                    function handleMessage(data) {
-                        console.log("Data: "+data)
-                    }  
-                </script> 
-                <p:socket channel="/chat" onMessage="handleMessage">
+                <script type="text/javascript">
+                    var eventData;
+                    function handleMessage(event) {
+                        console.log('Message: '+event);
+                    }
+                    function displayEvent(xhr,status,args){
+                        eventData=args;
+                        console.log(args);
+                    }
+                    function useCommandButton(buttonId)
+                    {
+                        $('#'+buttonId).click();
+                    }
+                </script>
+                <p:commandButton id="useQueue"
+                                 action="#{userLogin.useQueue()}"
+                                 update=":growl"
+                                 style="display:none;"/>
+                <p:commandButton id="myChatButton"
+                                 actionListener="#{userLogin.getMessage()}"
+                                 update=":growl
+                                 :friendsMenuDataForm:friendChat"
+                                 style="display:none;"/>
+                <p:socket channel="/chat#{userLogin.user.id}" onError="handleMessage"
+                          onMessage="handleMessage">
+                    <p:ajax event="message"
+                            process="@this"
+                            update=":growl
+                                 :friendsMenuDataForm:friendChat"
+                            onstart="if(!chatDisplay){showChat();}"/>
                 </p:socket>
+                <!--useCommandButton('friendsMenuDataForm\\\\:useQueue');}-->
                 <p:accordionPanel multiple="true">
                     <p:tab id="onlineFriendsTab"
                            title="Online friends">
@@ -205,7 +230,8 @@
                                                      onstart="displayAjaxStatus=false;"
                                                      oncomplete="displayAjaxStatus=false;"
                                                      styleClass="sendButton"
-                                                     update=":friendsMenuDataForm"
+                                                     update=":friendsMenuDataForm:friendChat
+                                                     :growl"
                                                      actionListener="#{userLogin.chat.addMessage()}"/>
                                 </div>
                                 <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"

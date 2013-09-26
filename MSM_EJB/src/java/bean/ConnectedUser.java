@@ -20,7 +20,7 @@ public class ConnectedUser implements Serializable
     /**
      * List of connected users
      */
-    private static List<Users> USERS_LIST = new ArrayList<Users>();
+    private static List<UserLogin> USERS_LIST = new ArrayList<UserLogin>();
     private static int USERS_LIST_SIZE = 0;
     private Users user;
     @EJB
@@ -28,8 +28,25 @@ public class ConnectedUser implements Serializable
 
     public ConnectedUser() {
     }
-
-    public static List<Users> USERS_LIST() {
+    
+    public static boolean contains(Users user)
+    {
+        return ConnectedUser.getUserLogin(user)!=null;
+    }
+    
+    public static UserLogin getUserLogin(Users user)
+    {
+        for(UserLogin ul:USERS_LIST)
+        {
+            if(ul.getUser().equals(user))
+            {
+                return ul;
+            }
+        }
+        return null;
+    }
+    
+    public static List<UserLogin> USERS_LIST() {
         return USERS_LIST;
     }
 
@@ -39,9 +56,9 @@ public class ConnectedUser implements Serializable
     
     /**
      * Add an user to users list
-     * @param user {@link Users} - User to add in list
+     * @param user {@link UserLogin} - User to add in list
      */
-    public static synchronized void addUserConnexion(Users user)
+    public static synchronized void addUserConnexion(UserLogin user)
     {
         USERS_LIST.add(user);
         USERS_LIST_SIZE++;
@@ -49,9 +66,9 @@ public class ConnectedUser implements Serializable
     
     /**
      * Remove an user from users list
-     * @param user {@link Users} - User to remove from list
+     * @param user {@link UserLogin} - User to remove from list
      */
-    public static synchronized void deleteUserConnexion(Users user)
+    public static synchronized void deleteUserConnexion(UserLogin user)
     {
         USERS_LIST.remove(user);
         USERS_LIST_SIZE--;

@@ -10,6 +10,8 @@ import bean.log.ApplicationLogger;
 import entity.Users;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -91,6 +93,10 @@ public class UserLogin implements Serializable
      * Chat with other users
      */
     private Chat chat;
+    /**
+     * The queue messages
+     */
+    private Map<String,Object> queue=new HashMap<String,Object>();
     
     public UserLogin()
     {
@@ -117,6 +123,61 @@ public class UserLogin implements Serializable
     public String getHeaderID()
     {
         return UserLogin.headerID;
+    }
+    
+    public String useQueue()
+    {
+        if(this.queue.isEmpty())
+        {
+            return "";
+        }
+        for(String elmt:this.queue.keySet())
+        {
+            if(elmt.equals("user")&&this.queue.containsKey("message"))
+            {
+                Users u=(Users) this.queue.get(elmt);
+                Utils.displayMessage(
+                        FacesMessage.SEVERITY_INFO,
+                        "You got a message",u.getFirstname()+" "+
+                        u.getName()+" sent you a message");
+                break;
+            }
+            else if(!elmt.equals("message"))
+            {
+                Utils.displayMessage(
+                        FacesMessage.SEVERITY_INFO,
+                        "You got a '"+elmt+"'",
+                        this.queue.get(elmt).toString());
+            }
+        }
+        this.queue.clear();
+        return "";
+    }
+    
+    public void addQueue(Map<String,Object> elmts)
+    {
+        for(String elmt:elmts.keySet())
+        {
+            this.queue.put(elmt,elmts.get(elmt));
+        }
+    }
+    
+    public Map<String,Object> getQueue()
+    {
+        return this.queue;
+    }
+    
+    public boolean isEmptyQueue()
+    {
+        return this.queue.isEmpty();
+    }
+    
+    public void newMessage(Users user,String message)
+    {
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("user", user);
+        map.put("message", message);
+        this.addQueue(map);
     }
     
     /**
@@ -411,15 +472,15 @@ public class UserLogin implements Serializable
                 user.toString());
         if(this.user!=null)
         {
-//            ConnectedUser.deleteUserConnexion(this.user);
+//            ConnectedUser.deleteUserConnexion(this);
         }
         if(this.chat!=null)
         {
             this.chat.clear();
         }
         this.user=user;
-        this.chat=new Chat();
-        ConnectedUser.addUserConnexion(user);
+        this.chat=new Chat(this.user);
+        ConnectedUser.addUserConnexion(this);
     }
     
     public Users getUser()
@@ -463,7 +524,7 @@ public class UserLogin implements Serializable
     {
         ApplicationLogger.writeInfo("Déconnexion de l'utilisateur: "+
                 this.user.toString());
-        ConnectedUser.deleteUserConnexion(this.user);
+        ConnectedUser.deleteUserConnexion(this);
         if(this.chat!=null)
         {
             this.chat.clear();

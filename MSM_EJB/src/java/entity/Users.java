@@ -112,7 +112,7 @@ public class Users implements Serializable
     
     public boolean getSleeping()
     {
-        return !ConnectedUser.USERS_LIST().contains(this);
+        return !ConnectedUser.contains(this);
     }
 
     public String getFieldValue(String fieldName)

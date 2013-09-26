@@ -4,6 +4,8 @@
  */
 package bean.chat;
 
+import bean.ConnectedUser;
+import bean.UserLogin;
 import entity.Users;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,16 +23,19 @@ public class Chat
     /**
      * Conversations with friends
      */
-    private static int currentId=0;
     private Map<Users,List<Message>> contents = new HashMap<Users, List<Message>>();
     private List<Users> conversations=new ArrayList<Users>();
     private int nbConversations=0;
     private int currentIndex=-1;
     private boolean chatOpened=false;
-    private String currentMessage;
+    private String currentMessage="";
+    private String receivedMessage="";
+    private int receivedUserId=-1;
+    private Users user;
     
-    public Chat()
+    public Chat(Users user)
     {
+        this.user=user;
     }
     
     public void clear()
@@ -54,6 +59,22 @@ public class Chat
 
     public void setCurrentMessage(String currentMessage) {
         this.currentMessage = currentMessage;
+    }
+
+    public String getReceivedMessage() {
+        return receivedMessage;
+    }
+
+    public void setReceivedMessage(String receivedMessage) {
+        this.receivedMessage = receivedMessage;
+    }
+
+    public int getReceivedUserId() {
+        return receivedUserId;
+    }
+
+    public void setReceivedUserId(int receivedUserId) {
+        this.receivedUserId = receivedUserId;
     }
     
     public int switchUser(Users user)
@@ -97,14 +118,25 @@ public class Chat
             this.contents.put(user, new ArrayList<Message>());
             this.currentIndex=this.getIndexOf(user);
             this.chatOpened=true;
+            ConnectedUser.getUserLogin(user).getChat().createConversation(this.user);
         }
-        PushContext pushContext = PushContextFactory.getDefault().getPushContext();
-        pushContext.push("/chat", "New message :D");
     }
     
     public void deleteConversation(Users user)
     {
         System.err.println("Eh j't'ai fermé: "+user);
+    }
+    
+    public int getConversIndex(int userId)
+    {
+        for(Users u:this.conversations)
+        {
+            if(u.getId()==userId)
+            {
+                return this.conversations.indexOf(u);
+            }
+        }
+        return -1;
     }
     
     public List<Message> getConversWith(Users user)
@@ -145,6 +177,15 @@ public class Chat
         }
         this.contents.get(this.conversations.get(this.currentIndex-1)).add(
                 new Message(this.currentMessage,true));
+        UserLogin userLogin=ConnectedUser.getUserLogin(this.conversations.get(
+                this.currentIndex-1));
+        userLogin.newMessage(this.user, this.currentMessage);
+        Chat chat=userLogin.getChat();
+        chat.contents.get(this.user).add(
+                new Message(this.currentMessage,false));
+        PushContext pushContext = PushContextFactory.getDefault().getPushContext();
+        pushContext.push("/chat"+userLogin.getUser().getId(),
+                this.currentMessage);
         this.currentMessage="";
     }
     

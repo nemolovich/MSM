@@ -78,7 +78,7 @@
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>servlets.Jersey</param-value>
+            <param-value>servlets.PushServlet</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
