@@ -293,8 +293,12 @@ function verifChatTabIndex(chatId,currentInd,userId,userInd)
     {
         var tab=$('#chatLi_'+userId);
         $('#'+chatId+' .tab_container ul li').attr('class','ui-state-default');
-        $('#chatTab_'+userId).css('display','block');
+        var chatTab=$('#chatTab_'+userId);
+        chatTab.css('display','block');
         $(tab).attr('class','ui-state-default ui-tabs-selected ui-state-active ui-corner-bottom');
+        chatTab.animate({
+            scrollTop: chatTab[0].scrollHeight
+        }, 0);
     }
 }
 
