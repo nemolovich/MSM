@@ -26,7 +26,11 @@
                 </script>
                 <p:commandButton id="useQueue"
                                  action="#{userLogin.useQueue()}"
-                                 update=":growl"
+                                 update=":growl :friendsMenuDataForm"
+                                 onstart="displayAjaxStatus=false;"
+                                 oncomplete="friendsMenuTable.filter();
+                                 friendsMenuTableRevert.filter();
+                                 displayAjaxStatus=true;"
                                  style="display:none;"/>
                 <p:commandButton id="myChatButton"
                                  actionListener="#{userLogin.getMessage()}"
@@ -41,8 +45,15 @@
                                  :friendsMenuDataForm:friendChat"
                             onstart="if(!chatDisplay){showChat();}"/>
                 </p:socket>
+                <p:socket channel="/queue#{userLogin.user.id}" onError="handleMessage"
+                          onMessage="handleMessage">
+                    <p:ajax event="message"
+                            process="@this"
+                            oncomplete="useCommandButton('friendsMenuDataForm\\\\:useQueue');"/>
+                </p:socket>
                 <!--useCommandButton('friendsMenuDataForm\\\\:useQueue');}-->
-                <p:accordionPanel multiple="true">
+                <p:accordionPanel id="friendsTabs"
+                                  multiple="true">
                     <p:tab id="onlineFriendsTab"
                            title="Online friends">
                         <p:contextMenu id="friendsContextMenu"
@@ -211,9 +222,11 @@
                                          style="display:none;">
                                         <c:forEach items="#{userLogin.chat.getLastConversWith(convers)}"
                                                    var="message">
-                                            <h:outputText value="#{utils.getBreakLinesString(message.message)}"
-                                                          styleClass="chatMessage #{message.sent?'sendingMessage':'receivedMessage'}"
-                                                          escape="false"/>
+                                            <div class="chatMessageContainer">
+                                                <h:outputText value="#{utils.getBreakLinesString(message.message)}"
+                                                              styleClass="chatMessage #{message.sent?'sendingMessage':'receivedMessage'}"
+                                                              escape="false"/>
+                                            </div>
                                         </c:forEach>
                                     </div>
                                 </c:forEach>

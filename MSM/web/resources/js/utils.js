@@ -12,6 +12,8 @@ var debug=false;
  * Permet d'afficher l'état des requêtes ajax en modal
  * @type Boolean
  */
+var statusDialog='';
+statusDialog.show=(function(){console.log('statusDiadlog is not defined');});
 var displayAjaxStatus=true;
 var loaded=false;
 var hideTimer;

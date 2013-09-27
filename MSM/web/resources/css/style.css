@@ -843,6 +843,22 @@ TABLE.infos_header
     height:                             268px;
     margin-bottom:                      34px;
     overflow-y:                         scroll;
+    background:                         -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 65%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background:                         -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.1)), color-stop(65%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background:                         -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.05) 65%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.05) 65%,rgba(0,0,0,0) 100%); /* Opera 12+ */
+    background:                         -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.05) 65%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background:                         radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.05) 65%,rgba(0,0,0,0) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.chatContent .chatMessageContainer
+{
+    float:                              left;
+    display:                            block;
+    height:                             auto;
+    min-height:                         30px;
+    width:                              100%;
 }
 
 .chatContent .chatMessage
@@ -859,15 +875,16 @@ TABLE.infos_header
 
 .chatContent .chatMessage.receivedMessage
 {
-    text-align:                         right;
-    background-color:                   rgba(162,150,150,0.2);
-    background:                         #A29696 -moz-linear-gradient(top,  rgba(255,255,255,0) 50%, rgba(255,255,255,0.4) 100%) !important; /* FF3.6+ */
-    background:                         #A29696 -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))) !important; /* Chrome,Safari4+ */
-    background:                         #A29696 -webkit-linear-gradient(top,  rgba(255,255,255,50) 0%,rgba(255,255,255,0.4) 100%) !important; /* Chrome10+,Safari5.1+ */
-    background:                         #A29696 -o-linear-gradient(top,  rgba(255,255,255,50) 0%,rgba(255,255,255,0.4) 100%) !important; /* Opera 11.10+ */
-    background:                         #A29696 -ms-linear-gradient(top,  rgba(255,255,255,50) 0%,rgba(255,255,255,0.4) 100%) !important; /* IE10+ */
-    background:                         #A29696 linear-gradient(top,  rgba(255,255,255,0) 50%,rgba(255,255,255,0.4) 100%) !important; /* W3C */
-    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#00A29696', endColorstr='#66A29696',GradientType=0 ) !important; /* IE6-9 */ 
+    float:                              right;
+    /*text-align:                         right;*/
+    background:                         rgba(162,150,150,0.2);
+    background:                         rgba(162,150,150,0.2) -moz-linear-gradient(top, rgba(162,150,150,0) 0%, rgba(162,150,150,0) 50%, rgba(162,150,150,0.2) 100%); /* FF3.6+ */
+    background:                         rgba(162,150,150,0.2) -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,150,150,0)), color-stop(50%,rgba(162,150,150,0)), color-stop(100%,rgba(162,150,150,0.2))); /* Chrome,Safari4+ */
+    background:                         rgba(162,150,150,0.2) -webkit-linear-gradient(top, rgba(162,150,150,0) 0%,rgba(162,150,150,0) 50%,rgba(162,150,150,0.2) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         rgba(162,150,150,0.2) -o-linear-gradient(top, rgba(162,150,150,0) 0%,rgba(162,150,150,0) 50%,rgba(162,150,150,0.2) 100%); /* Opera 11.10+ */
+    background:                         rgba(162,150,150,0.2) -ms-linear-gradient(top, rgba(162,150,150,0) 0%,rgba(162,150,150,0) 50%,rgba(162,150,150,0.2) 100%); /* IE10+ */
+    background:                         rgba(162,150,150,0.2) linear-gradient(to bottom, rgba(162,150,150,0) 0%,rgba(162,150,150,0) 50%,rgba(162,150,150,0.2) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#00A29696', endColorstr='#33A29696',GradientType=0 ); /* IE6-9 */
     border-color:                       #C8C4C4;
     border-top-right-radius:            0px;
     -webkit-border-top-right-radius:    0px;
@@ -876,15 +893,16 @@ TABLE.infos_header
 
 .chatContent .chatMessage.sendingMessage
 {
-    text-align:                         left;
-    background-color:                   rgba(50,100,150,0.2);
-    background:                         #85B2CB -moz-linear-gradient(top,  rgba(255,255,255,0) 50%, rgba(255,255,255,0.4) 100%) !important; /* FF3.6+ */
-    background:                         #85B2CB -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.4))) !important; /* Chrome,Safari4+ */
-    background:                         #85B2CB -webkit-linear-gradient(top,  rgba(255,255,255,50) 0%,rgba(255,255,255,0.4) 100%) !important; /* Chrome10+,Safari5.1+ */
-    background:                         #85B2CB -o-linear-gradient(top,  rgba(255,255,255,50) 0%,rgba(255,255,255,0.4) 100%) !important; /* Opera 11.10+ */
-    background:                         #85B2CB -ms-linear-gradient(top,  rgba(255,255,255,50) 0%,rgba(255,255,255,0.4) 100%) !important; /* IE10+ */
-    background:                         #85B2CB linear-gradient(top,  rgba(255,255,255,0) 50%,rgba(255,255,255,0.4) 100%) !important; /* W3C */
-    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085B2CB', endColorstr='#6685B2CB',GradientType=0 ) !important; /* IE6-9 */ 
+    float:                              left;
+    /*text-align:                         left;*/
+    background:                         rgba(50,100,150,0.2);
+    background:                         rgba(50,100,150,0.2) -moz-linear-gradient(top, rgba(50,100,150,0) 0%, rgba(50,100,150,0) 50%, rgba(50,100,150,0.2) 100%); /* FF3.6+ */
+    background:                         rgba(50,100,150,0.2) -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(50,100,150,0)), color-stop(50%,rgba(50,100,150,0)), color-stop(100%,rgba(50,100,150,0.2))); /* Chrome,Safari4+ */
+    background:                         rgba(50,100,150,0.2) -webkit-linear-gradient(top, rgba(50,100,150,0) 0%,rgba(50,100,150,0) 50%,rgba(50,100,150,0.2) 100%); /* Chrome10+,Safari5.1+ */
+    background:                         rgba(50,100,150,0.2) -o-linear-gradient(top, rgba(50,100,150,0) 0%,rgba(50,100,150,0) 50%,rgba(50,100,150,0.2) 100%); /* Opera 11.10+ */
+    background:                         rgba(50,100,150,0.2) -ms-linear-gradient(top, rgba(50,100,150,0) 0%,rgba(50,100,150,0) 50%,rgba(50,100,150,0.2) 100%); /* IE10+ */
+    background:                         rgba(50,100,150,0.2) linear-gradient(to bottom, rgba(50,100,150,0) 0%,rgba(50,100,150,0) 50%,rgba(50,100,150,0.2) 100%); /* W3C */
+    filter:                             progid:DXImageTransform.Microsoft.gradient( startColorstr='#00326496', endColorstr='#33326496',GradientType=0 ); /* IE6-9 */
     border-color:                       #85B2CB;
     border-bottom-left-radius:          0px;
     -webkit-border-bottom-left-radius:  0px;

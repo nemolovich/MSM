@@ -20,6 +20,8 @@ import javax.inject.Named;
 import org.primefaces.event.ResizeEvent; 
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
+import org.primefaces.push.PushContext;
+import org.primefaces.push.PushContextFactory;
 
 /**
  *
@@ -97,6 +99,10 @@ public class UserLogin implements Serializable
      * The queue messages
      */
     private Map<String,Object> queue=new HashMap<String,Object>();
+    /**
+     * Ids to update
+     */
+    private String scripts;
     
     public UserLogin()
     {
@@ -108,6 +114,14 @@ public class UserLogin implements Serializable
 
     public void setChat(Chat chat) {
         this.chat = chat;
+    }
+
+    public String getScripts() {
+        return scripts;
+    }
+
+    public void setScripts(String updates) {
+        this.scripts = updates;
     }
     
     public String getMenuLeftID()
@@ -123,6 +137,25 @@ public class UserLogin implements Serializable
     public String getHeaderID()
     {
         return UserLogin.headerID;
+    }
+    
+    public void broadCast(String key, Object content)
+    {
+        if(this.user==null)
+        {
+            return;
+        }
+        for(UserLogin ul:ConnectedUser.USERS_LIST())
+        {
+            if(!ul.equals(this))
+            {
+                Map<String, Object> map=new HashMap<String, Object>();
+                map.put(key, content);
+                ul.addQueue(map);
+                PushContext pushContext = PushContextFactory.getDefault().getPushContext();
+                pushContext.push("/queue"+ul.getUser().getId(),"newQueue");
+            }
+        }
     }
     
     public String useQueue()
@@ -142,7 +175,19 @@ public class UserLogin implements Serializable
                         u.getName()+" sent you a message");
                 break;
             }
-            else if(!elmt.equals("message"))
+            else if(elmt.equals("message"))
+            {
+            }
+            else if(elmt.equals("connexion"))
+            {
+                Users u=(Users) this.queue.get(elmt);
+                Utils.displayMessage(
+                        FacesMessage.SEVERITY_INFO,
+                        "User connected",u.getFirstname()+" "+
+                        u.getName()+" is now connected");
+                break;
+            }
+            else
             {
                 Utils.displayMessage(
                         FacesMessage.SEVERITY_INFO,
@@ -480,6 +525,7 @@ public class UserLogin implements Serializable
         }
         this.user=user;
         this.chat=new Chat(this.user);
+        this.broadCast("connexion", user);
         ConnectedUser.addUserConnexion(this);
     }
     

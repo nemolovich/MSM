@@ -170,7 +170,7 @@ public class Chat
     public void addMessage()
     {
         if(this.currentMessage==null||this.currentMessage.isEmpty()||
-                this.currentIndex<1||
+                this.currentIndex<1||this.user==null||
                 this.contents.size()<1)
         {
             return;
