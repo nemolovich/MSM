@@ -154,6 +154,7 @@ public abstract class EntityView<C,F extends AbstractFacade<C>> extends EntitySl
 
     public String entityView(C entity)
     {
+        System.err.println("VIEW");
         this.creating = false;
         this.editing = false;
         this.entity = entity;
@@ -162,6 +163,7 @@ public abstract class EntityView<C,F extends AbstractFacade<C>> extends EntitySl
     
     public String entityUpdate(C entity)
     {
+        System.err.println("UPDATE");
         this.creating = false;
         this.editing = true;
         this.entity = entity;

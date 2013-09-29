@@ -38,14 +38,29 @@ public class UsersView extends EntityView<Users, UsersFacade>
         return super.entityUpdate(entity);
     }
     
-    public String entityUpdate(Users entity, UserLogin currenUsers)
+    public String entityView(Users user, UserLogin currentUsers)
     {
-        super.entityUpdate(entity);
-        if(currenUsers.getRights().equals(Utils.ADMIN_RIGHTS))
+        System.err.println("get View");
+        String view=super.entityView(user);
+        System.err.println("got View");
+        if(!currentUsers.getUser().equals(user)&&
+                currentUsers.getRights().equalsIgnoreCase(Utils.ADMIN_RIGHTS))
         {
-            return super.entityUpdate(entity);
+            return view;
         }
-        return "/restricted/user/user/update";
+        return "/restricted/user/users/view";
+    }
+    
+    public String entityUpdate(Users entity, UserLogin currentUsers)
+    {
+        System.err.println("get Update");
+        String update=super.entityUpdate(entity);
+        System.err.println("got Update");
+        if(!currentUsers.getUser().equals(entity))
+        {
+            return update;
+        }
+        return "/restricted/user/users/update";
     }
     
     public String update(UserLogin currenUsers)

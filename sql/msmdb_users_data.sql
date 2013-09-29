@@ -14,7 +14,7 @@
 ----- Supprime la table si elle existe, sinon commenter -----
 DELETE FROM ROOT.FRIENDS_RELATION;
 ALTER TABLE ROOT.FRIENDS_RELATION ALTER COLUMN ID RESTART WITH 1;
-DELETE FROM ROOT.USERS;
+DELETE FROM ROOT.USERS WHERE ID>0;
 ALTER TABLE ROOT.USERS ALTER COLUMN ID RESTART WITH 1;
 
 ----------------- Création des utilisateurs -----------------

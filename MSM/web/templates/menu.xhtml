@@ -10,6 +10,7 @@
     <h:body>
         <ui:include src="/restricted/admin/data/log/logPopup.xhtml"/>
         <ui:include src="/Albums/Dialog/createPopup.xhtml" />
+        <ui:include src="/restricted/admin/data/users/createPopup.xhtml" />
         <h:form id="menu_form">
                 <p:panelMenu styleClass="menu"
                              widgetVar="menu_admin">
@@ -37,6 +38,39 @@
                         <p:menuitem value="Security" 
                                     icon="ui-icon-security"
                                     url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+                        <p:menuitem action="/restricted/user/users/view"
+                                    actionListener="#{usersView.entityView(userLogin.user,userLogin)}"
+                                    value="Display my profile"
+                                    icon="ui-icon-flag"
+                                    immediate="true"
+                                    ajax="false"
+                                    title="Display your account details"
+                                    rendered="#{userLogin.logged}"/>
+                        <p:menuitem action="/restricted/user/users/update"
+                                    actionListener="#{usersView.entityUpdate(userLogin.user,userLogin)}"
+                                    value="Modify my profile"
+                                    icon="ui-icon-wrench"
+                                    styleClass="blue_icon"
+                                    immediate="true"
+                                    ajax="false"
+                                    title="Modify your account details"
+                                    rendered="#{userLogin.logged}"/>
+                    </p:submenu>
+                    <p:submenu label="Admin Panel"
+                               icon="ui-icon-admin-config"
+                               rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}">
+                        <p:menuitem outcome="/restricted/admin/data/users/list"
+                                    value="Users List"
+                                    icon="ui-icon-copy"
+                                    immediate="true"
+                                    ajax="false"
+                                    title="Display the users full list"/>
+                        <p:menuitem action="javascript:void(0);"
+                                    actionListener="#{usersView.entityCreate()}"
+                                    value="Add an user"
+                                    icon="ui-icon-new-users"
+                                    title="Add an user in list"
+                                    oncomplete="usersViewDialog.show();"/>
                     </p:submenu>
                     <p:submenu label="Log"
                                rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}">

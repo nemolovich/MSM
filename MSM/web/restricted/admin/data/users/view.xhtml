@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>User details</title>
+        <script type="text/javascript">
+            var usersViewFirst=true;
+        </script>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="usersViewForm">
+                <p:outputPanel id="usersViewEditForm"
+                               rendered="#{not empty usersView.entity}">
+                    <p:outputPanel rendered="#{usersView.creating or usersView.editing}">
+                        <p>
+                            Please provide the informations for this user.
+                            <br />
+                            (<span class="red-star">*</span>: required fields)
+                        </p>
+                    </p:outputPanel>
+                    <h:panelGrid columns="2" columnClasses="label,fields">
+
+                        <h:outputText value="Identifier:"
+                                      rendered="#{not usersView.creating and
+                                                  not usersView.editing}"/>
+                        <h:outputText value="#{usersView.entity.id}"
+                                      title="User identifyer number"
+                                      rendered="#{not usersView.creating and
+                                                  not usersView.editing}"/>
+
+                        <p:outputLabel for="umail"
+                                       value="Mail:"
+                                       title="User mail address"
+                                       styleClass="#{usersView.creating or
+                                                     usersView.editing?'required':''}"/>
+                        <h:outputText value="#{usersView.entity.mail}"
+                                      title="User mail address"
+                                      rendered="#{not usersView.creating and
+                                                  not usersView.editing}"/>
+                        <p:inputText id="umail"
+                                     value="#{usersView.entity.mail}"
+                                     rendered="#{usersView.creating or
+                                                 usersView.editing}">
+                            <f:validator binding="#{notNullFieldValidator}"/>
+                            <f:attribute name="requiredMessage"
+                                         value="The 'Mail' field can't be empty"/>
+                            <f:attribute name="requiredTitle"
+                                         value="Field 'Mail' empty"/>
+                            <f:validator binding="#{usersUniqueFieldValidator}"/>
+                            <f:attribute name="fieldName" value="Mail" />
+                            <f:attribute name="update_id" value="#{usersView.entity.id}" />
+                        </p:inputText>
+
+                        <p:outputLabel for="uname"
+                                       value="Name:"
+                                       styleClass="#{usersView.creating or
+                                                     usersView.editing?'required':''}"/>
+                        <h:outputText value="#{usersView.entity.name}"
+                                      title="User name"
+                                      rendered="#{not usersView.creating and
+                                                  not usersView.editing}"/>
+                        <p:inputText id="uname"
+                                     value="#{usersView.entity.name}"
+                                     rendered="#{usersView.creating or
+                                                 usersView.editing}">
+                            <f:validator binding="#{notNullFieldValidator}"/>
+                            <f:attribute name="requiredMessage"
+                                         value="The 'Name' field can't be empty"/>
+                            <f:attribute name="requiredTitle"
+                                         value="Field 'Name' empty"/>
+                        </p:inputText>
+
+                        <p:outputLabel for="ufirstname"
+                                       value="Firstname:"
+                                       styleClass="#{usersView.creating or
+                                                     usersView.editing?'required':''}"/>
+                        <h:outputText value="#{usersView.entity.firstname}"
+                                      title="User firstname"
+                                      rendered="#{not usersView.creating and
+                                                  not usersView.editing}"/>
+                        <p:inputText id="ufirstname"
+                                     value="#{usersView.entity.firstname}"
+                                     rendered="#{usersView.creating or
+                                                 usersView.editing}">
+                            <f:validator binding="#{notNullFieldValidator}"/>
+                            <f:attribute name="requiredMessage"
+                                         value="The 'Firstname' field can't be empty"/>
+                            <f:attribute name="requiredTitle"
+                                         value="Field 'Firstname' empty"/>
+                        </p:inputText>
+
+                        <p:outputLabel for="urights" value="Rights:"
+                                        rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}"/>
+                        <p:outputPanel rendered="#{userLogin.rights.equalsIgnoreCase(usersView.admin_Rights)}">
+                            <h:outputText value="#{usersView.entity.rights}"
+                                          title="User rights"
+                                          rendered="#{not usersView.creating and
+                                                      not usersView.editing}"/>
+                            <p:selectOneMenu id="urights"
+                                             value="#{usersView.entity.rights}"
+                                             rendered="#{usersView.creating or
+                                                         usersView.editing}">
+                                <f:selectItems value="#{utils.getEnumRights()}"/>
+                            </p:selectOneMenu>
+                        </p:outputPanel>
+                        
+                        
+                        <p:outputLabel for="upassword" value="Password"
+                                       styleClass="required"
+                                             rendered="#{usersView.creating or
+                                                         usersView.editing}"/>
+                        <p:password id="upassword"
+                                    value="#{usersView.entity.password}"
+                                    feedback="true"
+                                    strongLabel="Strong security"
+                                    goodLabel="Good security"
+                                    weakLabel="Low security"
+                                    promptLabel="Type a password"
+                                    rendered="#{usersView.creating or
+                                                usersView.editing}">
+                            <f:validator binding="#{passwordValidator}" />
+                            <f:attribute name="confirm" value="#{uconfirm}" />
+                            <f:attribute name="update_id" value="#{usersView.entity.id}" />
+                            <f:attribute name="min_length" value="#{true}" />
+                        </p:password>
+
+                        <p:outputLabel for="uconfirm" value="Confirmation"
+                                       styleClass="required"
+                                       rendered="#{usersView.creating or
+                                                   usersView.editing}"/>
+                        <p:password id="uconfirm" binding="#{uconfirm}"
+                                    rendered="#{usersView.creating or
+                                                usersView.editing}"/>
+
+                    </h:panelGrid>
+                    <p:outputPanel styleClass="buttons_panel"
+                                   rendered="#{not userLogin.user.equals(usersView.entity)}">
+                        <p:outputPanel rendered="#{not usersView.creating and
+                                                   not usersView.editing}">
+                            <p:commandButton id="updateAccount"
+                                             value="Modify"
+                                             icon="ui-icon-wrench"
+                                             title="Modify this user"
+                                             update="@form"
+                                             oncomplete="usersViewFirst=false;"
+                                             actionListener="#{usersView.entityUpdate(usersView.entity,userLogin)}"/>
+                            <p:commandButton id="closePopup" value="Close"
+                                             actionListener="#{usersView.cancelCreate()}"
+                                             icon="ui-icon-closethick"
+                                             styleClass="red_icon"
+                                             title="Close window"
+                                             oncomplete="usersViewDialog.hide();">
+                            </p:commandButton>
+                        </p:outputPanel>
+                        <p:outputPanel rendered="#{not usersView.creating and
+                                                   usersView.editing}">
+                            <p:commandButton id="saveAccount"
+                                             value="Update"
+                                             icon="ui-icon-disk"
+                                             styleClass="green_icon"
+                                             title="Save the user modifications"
+                                             update="@form :growl"
+                                             oncomplete="if(createRequest(usersViewDialog, xhr, status, args))
+                                                        {tryUpdate('displayUsers','displayUsers');}
+                                                        else{return false;}"
+                                             actionListener="#{usersView.update()}"/>
+                            <p:commandButton id="cancelUpdate" value="Cancel"
+                                             actionListener="#{usersView.cancelUpdate()}"
+                                             icon="ui-icon-closethick"
+                                             update="@form"
+                                             styleClass="red_icon"
+                                             immediate="true"
+                                             oncomplete="if(usersViewFirst){usersViewDialog.hide();}"
+                                             title="Cancel modifications">
+                            </p:commandButton>
+                        </p:outputPanel>
+                        <p:outputPanel rendered="#{usersView.creating and
+                                                   not usersView.editing}">
+                            <p:commandButton id="createAccount"
+                                             value="Create"
+                                             icon="ui-icon-check"
+                                             styleClass="green_icon"
+                                             title="Create this user"
+                                             update="@form :growl"
+                                             oncomplete="if(createRequest(usersViewDialog, xhr, status, args))
+                                                        {tryUpdate('displayUsers','displayUsers');}
+                                                        else{return false;}"
+                                             actionListener="#{usersView.create()}"/>
+                            <p:commandButton id="cancelCreate" value="Cancel"
+                                             actionListener="#{usersView.cancelUpdate()}"
+                                             icon="ui-icon-closethick"
+                                             update="@form"
+                                             styleClass="red_icon"
+                                             immediate="true"
+                                             oncomplete="usersViewDialog.hide();"
+                                             title="Cancel creation">
+                            </p:commandButton>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                </p:outputPanel>
+                <script type="text/javascript">
+                    $(document).ready(function()
+                    {
+                        addRedStarsTorequiredFields();
+                    });
+                </script>
+            </h:form>
+            <h:form id="emptyUserErrorForm" rendered="#{empty usersView.entity}">
+                <p:outputPanel rendered="#{empty usersView.entity}">
+                    <div class="ui-messages ui-widget">
+                        <div class="ui-messages-error ui-corner-all">
+                            <span class="ui-messages-error-icon"/>
+                            <ul>
+                                <li>
+                                    <span class="ui-messages-error-summary">
+                                        Wrong selection!
+                                        <script type="text/javascript">
+//                                                    interventionMenuViewDialog.hide();
+                                        </script>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>
+                        You will be redirected to the home page in
+                        <h:outputText id="countDown" value="5"/> seconds
+                    </p>
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            setTimer(5);
+                        });
+                    </script>
+                    <p:poll interval="1" update="emptyUserErrorForm:countDown"
+                            oncomplete="updateTimer('emptyUserErrorForm','countDown');"/>
+                </p:outputPanel>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

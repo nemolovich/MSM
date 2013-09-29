@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>ser Account</title>
+    </h:head>
+    <h:body>
+    	<ui:composition template="/templates/page_template.xhtml">
+            <ui:define name="title">
+                | User Account
+            </ui:define>
+            <ui:define name="content">
+                <f:attribute name="header" value="User Account"/>
+                <f:view>
+                    <h:form id="myAccountViewForm">
+                        <p:outputPanel id="myAccountViewEditForm"
+                                       rendered="#{not empty usersView.entity}">
+                            <p:outputPanel rendered="#{usersView.creating or usersView.editing}">
+                                <p>
+                                    Please provide the informations for your account.
+                                    <br />
+                                    (<span class="red-star">*</span>: required fields)
+                                </p>
+                            </p:outputPanel>
+                            <h:panelGrid columns="2" columnClasses="label,fields">
+                                <p:outputLabel for="umail"
+                                               value="Mail:"
+                                               title="User mail address"
+                                               styleClass="#{usersView.creating or
+                                                             usersView.editing?'required':''}"/>
+                                <h:outputText value="#{usersView.entity.mail}"
+                                              title="User mail address"
+                                              rendered="#{not usersView.creating and
+                                                          not usersView.editing}"/>
+                                <p:inputText id="umail"
+                                             value="#{usersView.entity.mail}"
+                                             rendered="#{usersView.creating or
+                                                         usersView.editing}">
+                                    <f:validator binding="#{notNullFieldValidator}"/>
+                                    <f:attribute name="requiredMessage"
+                                                 value="The 'Mail' field can't be empty"/>
+                                    <f:attribute name="requiredTitle"
+                                                 value="Field 'Mail' empty"/>
+                                    <f:validator binding="#{usersUniqueFieldValidator}"/>
+                                    <f:attribute name="fieldName" value="Mail" />
+                                    <f:attribute name="update_id" value="#{usersView.entity.id}" />
+                                </p:inputText>
+
+                                <p:outputLabel for="uname"
+                                               value="Name:"
+                                               styleClass="#{usersView.creating or
+                                                             usersView.editing?'required':''}"/>
+                                <h:outputText value="#{usersView.entity.name}"
+                                              title="User name"
+                                              rendered="#{not usersView.creating and
+                                                          not usersView.editing}"/>
+                                <p:inputText id="uname"
+                                             value="#{usersView.entity.name}"
+                                             rendered="#{usersView.creating or
+                                                         usersView.editing}">
+                                    <f:validator binding="#{notNullFieldValidator}"/>
+                                    <f:attribute name="requiredMessage"
+                                                 value="The 'Name' field can't be empty"/>
+                                    <f:attribute name="requiredTitle"
+                                                 value="Field 'Name' empty"/>
+                                </p:inputText>
+
+                                <p:outputLabel for="ufirstname"
+                                               value="Firstname:"
+                                               styleClass="#{usersView.creating or
+                                                             usersView.editing?'required':''}"/>
+                                <h:outputText value="#{usersView.entity.firstname}"
+                                              title="User firstname"
+                                              rendered="#{not usersView.creating and
+                                                          not usersView.editing}"/>
+                                <p:inputText id="ufirstname"
+                                             value="#{usersView.entity.firstname}"
+                                             rendered="#{usersView.creating or
+                                                         usersView.editing}">
+                                    <f:validator binding="#{notNullFieldValidator}"/>
+                                    <f:attribute name="requiredMessage"
+                                                 value="The 'Firstname' field can't be empty"/>
+                                    <f:attribute name="requiredTitle"
+                                                 value="Field 'Firstname' empty"/>
+                                </p:inputText>
+                                
+                                <p:outputLabel for="upassword" value="Password"
+                                       styleClass="required"
+                                             rendered="#{usersView.creating or
+                                                         usersView.editing}"/>
+                                <p:password id="upassword"
+                                            value="#{usersView.entity.password}"
+                                            feedback="true"
+                                            strongLabel="Strong security"
+                                            goodLabel="Good security"
+                                            weakLabel="Low security"
+                                            promptLabel="Type a password"
+                                            rendered="#{usersView.creating or
+                                                        usersView.editing}">
+                                    <f:validator binding="#{passwordValidator}" />
+                                    <f:attribute name="confirm" value="#{uconfirm}" />
+                                    <f:attribute name="update_id" value="#{usersView.entity.id}" />
+                                    <f:attribute name="min_length" value="#{true}" />
+                                </p:password>
+
+                                <p:outputLabel for="uconfirm" value="Confirmation"
+                                               styleClass="required"
+                                               rendered="#{usersView.creating or
+                                                           usersView.editing}"/>
+                                <p:password id="uconfirm" binding="#{uconfirm}"
+                                            rendered="#{usersView.creating or
+                                                        usersView.editing}"/>
+                                
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

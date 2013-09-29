@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Users List</title>
+    </h:head>
+    <h:body>
+    	<ui:composition template="/templates/page_template.xhtml">
+            <ui:define name="title">
+                | Users List
+            </ui:define>
+            <ui:define name="content">
+                <f:attribute name="header" value="Users list"/>
+                <f:view>
+                    <h:form id="displayUsers">
+                        <p:dataTable value="#{usersView.entries}"
+                                     var="item"
+                                     emptyMessage="No user found"   
+                                     widgetVar="userTable"
+                                     rows="#{utils.maxDataRows}"
+                                     rowKey="#{item.name}"
+                                     rowIndexVar="idex"
+                                     sortBy="#{item.name}"
+                                     paginator="true"
+                                     paginatorPosition="bottom">
+                            <p:column headerText="Mail"
+                                      sortBy="#{item.mail}"
+                                      filterBy="#{item.mail}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{item.mail}"/>
+                            </p:column>
+                            <p:column headerText="Name"
+                                      sortBy="#{item.name}"
+                                      filterBy="#{item.name}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{item.name}"/>
+                            </p:column>
+                            <p:column headerText="Firstname"
+                                      sortBy="#{item.firstname}"
+                                      filterBy="#{item.firstname}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{item.firstname}"/>
+                            </p:column>
+                            <p:column headerText="Rights"
+                                      sortBy="#{item.rights}"
+                                      filterBy="#{item.rights}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{item.rights}"/>
+                            </p:column>
+                            <p:column headerText="Actions"
+                                      style="width:1% !important;white-space: nowrap;">
+                                <p:commandButton actionListener="#{usersView.entityView(item)}"
+                                                 action="javascript:void(0);"
+                                                 title="Display the user details"
+                                                 icon="ui-icon-search"
+                                                 oncomplete="usersViewDialog.show();"
+                                                 style="font-size: 60%;"/>
+                                <p:commandButton actionListener="#{usersView.entityUpdate(item)}"
+                                                 action="javascript:void(0);"
+                                                 title="Edit this user"
+                                                 icon="ui-icon-pencil"
+                                                 oncomplete="usersViewDialog.show();"
+                                                 style="font-size: 60%;"/>
+                                <p:commandButton onclick="return(confirm('#{usersView.getDeleteMessage(item)}'));"
+                                                 action="javascript:void(0);"
+                                                 actionListener="#{usersView.entityDelete(item)}"
+                                                 title="Delete this user"
+                                                 icon="ui-icon-trash"
+                                                 style="font-size: 60%;"
+                                                 styleClass="red_icon"
+                                                 update="@form"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:outputPanel style="float:left">
+                                    <h:outputText value="Rechercher:"/>
+                                    <p:inputText id="globalFilter" onkeyup="userTable.filter();"
+                                                 title="Search in all fields"
+                                                 style="width:150px;margin-left:20px" />
+                                    <p:commandButton id="create" value="Add an user"
+                                                     icon="ui-icon-circle-plus"
+                                                     styleClass="green_icon"
+                                                     title="Add a new user in list"
+                                                     oncomplete="usersViewDialog.show();"
+                                                     actionListener="#{usersView.entityCreate()}"
+                                                     style="margin-left:20px">
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </f:facet>
+                            <script type="text/javascript">
+                                $(document).ready(function()
+                                {
+                                    userTable.filter();
+                                });
+                            </script>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
